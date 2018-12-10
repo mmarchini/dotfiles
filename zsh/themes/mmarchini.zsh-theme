@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-local HOSTNAME="{%m}"
+local HOSTNAME="/%m/"
 local STATUS="%(?,%{$fg_bold[green]%}$HOSTNAME,%{$fg_bold[red]%}$HOSTNAME)"
 
 function get_pwd(){
