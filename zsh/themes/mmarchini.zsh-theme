@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-local STATUS="%(?,%{$fg_bold[green]%}λ,%{$fg_bold[red]%}λ)"
+local HOSTNAME="{%m}"
+local STATUS="%(?,%{$fg_bold[green]%}$HOSTNAME,%{$fg_bold[red]%}$HOSTNAME)"
 
 function get_pwd(){
   git_root=$PWD

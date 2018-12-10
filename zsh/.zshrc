@@ -1,4 +1,4 @@
-export ZSH=/Users/mmarchini/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 DOTFILES_PATH=$(dirname $(dirname $(readlink ${(%):-%N})))
 
