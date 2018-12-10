@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+function prependPathIfExists {
+  if [ -d "$1" ]; then
+    export PATH="$1:$PATH"
+  fi
+}

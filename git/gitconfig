@@ -1,0 +1,37 @@
+[user]
+	name = Mary Marchini
+	email = oss@mmarchini.me
+	signingkey = 528D3D0E11D6F4A448E74AD0B6776C7958DCDBE6
+[alias]
+	st = status
+	cdiff = "!git diff --cached $1 | ydiff -s -w 0 --wrap"
+	restore = reset --hard HEAD
+	rdiff = diff -R
+	remove-remote-tag = "!sh -c \"git push origin :refs/tags/$1\""
+	commti = commit
+	lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+	blow = "!git push -u origin $(git branch-name)"
+	tagger = "!f() { git push && git tag $1 && git push --tag; }; f"
+	gently-force-push = push --force-with-lease
+	sdiff = !git diff | ydiff -s -w 0 --wrap
+	exec = "!exec "
+[commit]
+	gpgsign = true
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan

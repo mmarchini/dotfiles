@@ -1,0 +1,8 @@
+# zsh configs
+
+## Install
+
+
+```bash
+```
+

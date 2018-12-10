@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# Common scripts to any operating system
+# export PATH=$DOTFILES_PATH/common:$PATH
+
+# Generic, non-shareable local bin folder
+export PATH=$HOME/bin:$PATH

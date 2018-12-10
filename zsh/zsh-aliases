@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+git-root() { cd $(git rev-parse --show-toplevel) }
+
+nodejs() { cd $HOME/workspace/nodejs/$1 }
+
+coredump () { ulimit -c unlimited; $@; ulimit -c 0 }
+
+# TODO(mmarchini) identify if we have pbcopy/pbpaste already
+if ! which pbcopy > /dev/null; then
+  alias pbcopy='xclip -selection clipboard'
+fi
+if ! which pbpaste > /dev/null; then
+  alias pbpaste='xclip -selection clipboard'
+fi
+alias duh='du -sh .[!.]* *'
+alias vim="vim -p"
+alias xim="xargs -o vim -p"
+alias c="code -r"
+alias docker-rm-exited='docker rm -v $(docker ps -a -q -f status=exited)'

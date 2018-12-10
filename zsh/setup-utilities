@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+source "$DOTFILES_PATH/helpers/path"
+source "$DOTFILES_PATH/helpers/source"
+
+# Homebrew
+prependPathIfExists "/opt/homebrew/bin"
+
+# added by travis gem
+sourceIfExists "$HOME/.travis/travis.sh"
+
+# TODO install smartcd and share config
+# smartcd
+sourceIfExists "$HOME/.smartcd_config"
+
+# TODO install fzf and share config
+sourceIfExists "$HOME/.fzf.zsh"
