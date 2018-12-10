@@ -1,5 +1,17 @@
 export ZSH=/Users/mmarchini/.oh-my-zsh
 
+DOTFILES_PATH=$(dirname $(dirname $(readlink ${(%):-%N})))
+
+DIRTY_FILES="$(cd $DOTFILES_PATH && git status --porcelain 2>/dev/null)"
+if [ -n "$DIRTY_FILES" ]; then
+  echo "WARNING: dotfiles folder is dirty";
+fi;
+
+OUT_OF_SYNC="$(cd $DOTFILES_PATH && git rev-list -n 1 HEAD@{upstream}..HEAD)"
+if [ -n "$OUT_OF_SYNC" ]; then
+  echo "WARNING: dotfiles folder is out of sync";
+fi;
+
 ZSH_THEME="mmarchini"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
