@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Sync e-mails
+echo "Running..." >> ~/.mutt/log/cron.mbsync.log;
+# TODO(mmarchini) get accounts from config or from accounts folder
+/usr/local/bin/mbsync -V mmarchini                     2>> ~/.mutt/log/mbsync.mmarchini.log >> ~/.mutt/log/mbsync.mmarchini.log;
+/usr/local/bin/mbsync -V matheusdot                    2>> ~/.mutt/log/mbsync.matheusdot.log >> ~/.mutt/log/mbsync.matheusdot.log;
+/usr/local/bin/mbsync -V sthima                        2>> ~/.mutt/log/mbsync.sthima.log >> ~/.mutt/log/mbsync.sthima.log;
+
+# Update notmut index
+/usr/local/bin/notmuch new                             2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
+
+# Apply notmuch tags
+/bin/bash ~/.mutt/scripts/tag-mailboxes                2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
+

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# TODO(mmarchini) notmuch body search is not suited to the approach used here.
+#   Need to improve tagging in the future
+
+######################
+# TAG ALL THE THINGS #
+######################
+
+# GitHub
+export GITHUB_FILTER="folder:mmarchini/inbox and from:github.com"
+# /usr/local/bin/notmuch tag +@me    $GITHUB_FILTER and "@mmarchini"
+# TODO(mmarchini) there might be a better way.
+/usr/local/bin/notmuch tag +closed $GITHUB_FILTER and "Closed #"
+/usr/local/bin/notmuch tag +merged $GITHUB_FILTER and "Merged #"
+/usr/local/bin/notmuch tag +reopen $GITHUB_FILTER and "Reopened #"
+/usr/local/bin/notmuch tag +lgtm   $GITHUB_FILTER and "approved this pull request."
+/usr/local/bin/notmuch tag +commit $GITHUB_FILTER and "pushed * commit*."
+
+# Node.js
+export NODEJS_FILTER="$GITHUB_FILTER and subject:\"[nodejs/.*]\"";
+# /usr/local/bin/notmuch tag +@build $NODEJS_FILTER and "@nodejs/build"
+# /usr/local/bin/notmuch tag +@diag  $NODEJS_FILTER and "@nodejs/diagnostics"
+# /usr/local/bin/notmuch tag +@all   $NODEJS_FILTER and \("@nodejs/collaborators" or "@nodejs/members"\)
+
+
+# V8
+export V8_FILTER="folder:mmarchini/inbox and from:chromium.org"
+/usr/local/bin/notmuch tag +merged $V8_FILTER and "Gerrit-MessageType: merged"
+/usr/local/bin/notmuch tag +commit $V8_FILTER and "Gerrit-MessageType: newpatchset"
+

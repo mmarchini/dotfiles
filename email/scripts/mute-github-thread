@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+
+import sys
+import logging
+from os.path import expanduser
+from email.parser import Parser
+from email.policy import default
+from urllib.parse import urlparse
+from http.client import HTTPSConnection
+
+log = logging.getLogger("mute_threads")
+log.setLevel(logging.DEBUG)
+fh = logging.FileHandler(expanduser('~/.mutt/log/neomutt-scripts.log'))
+fh.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.ERROR)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+log.addHandler(ch)
+log.addHandler(fh)
+
+def mute_github_thread(message):
+    unsubscribe_url = None
+    for maybe_url in message["List-Unsubscribe"].split(","):
+        maybe_url = maybe_url.strip().strip("<>")
+        try:
+            result = urlparse(maybe_url)
+            # RFC8058: "The List-Unsubscribe header field MUST contain one
+            #   HTTPS URI"
+            if result.scheme == "https":
+                unsubscribe_url = result
+                break
+        except ValueError:
+            continue
+    if not unsubscribe_url:
+        log.error("Couldn't find Unsubscribe URL. List-Unsubscribe header " +
+                  "is '%s'" % message["List-Unsubscribe"])
+        sys.exit(1)
+
+    c = HTTPSConnection(result.netloc)
+    c.request('GET', result.path)
+    res = c.getresponse()
+    if res.status >= 400:
+       log.error("Error unsubscribing from '%s'" % message['subject'])
+       log.error(res.read())
+       sys.exit(2)
+    log.info("Unsubscribed from '%s'" % message['subject'])
+
+
+message = Parser(policy=default).parse(sys.stdin)
+
+# Mute GitHub thread
+thread_id = None
+if message['from'].addresses[0].domain == "github.com":
+    mute_github_thread(message)
