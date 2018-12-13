@@ -1,31 +1,117 @@
-#!/bin/bash
+#!/usr/bin/env python2
 
-# TODO(mmarchini) notmuch body search is not suited to the approach used here.
-#   Need to improve tagging in the future
+# TODO(mmarchini) option to clear tags
+# TODO(mmarchini) log and handle errors
 
-######################
-# TAG ALL THE THINGS #
-######################
+import re
+import sys
+from email.parser import Parser
 
-# GitHub
-export GITHUB_FILTER="folder:mmarchini/inbox and from:github.com"
-# /usr/local/bin/notmuch tag +@me    $GITHUB_FILTER and "@mmarchini"
-# TODO(mmarchini) there might be a better way.
-/usr/local/bin/notmuch tag +closed $GITHUB_FILTER and "Closed #"
-/usr/local/bin/notmuch tag +merged $GITHUB_FILTER and "Merged #"
-/usr/local/bin/notmuch tag +reopen $GITHUB_FILTER and "Reopened #"
-/usr/local/bin/notmuch tag +lgtm   $GITHUB_FILTER and "approved this pull request."
-/usr/local/bin/notmuch tag +commit $GITHUB_FILTER and "pushed * commit*."
+# notmuch bindings are installed with notmuch
+import notmuch
 
-# Node.js
-export NODEJS_FILTER="$GITHUB_FILTER and subject:\"[nodejs/.*]\"";
-# /usr/local/bin/notmuch tag +@build $NODEJS_FILTER and "@nodejs/build"
-# /usr/local/bin/notmuch tag +@diag  $NODEJS_FILTER and "@nodejs/diagnostics"
-# /usr/local/bin/notmuch tag +@all   $NODEJS_FILTER and \("@nodejs/collaborators" or "@nodejs/members"\)
+FOLDERS = [
+    'mmarchini/inbox',
+]
 
+def is_github(message):
+    return "github.com" in message['from']
 
-# V8
-export V8_FILTER="folder:mmarchini/inbox and from:chromium.org"
-/usr/local/bin/notmuch tag +merged $V8_FILTER and "Gerrit-MessageType: merged"
-/usr/local/bin/notmuch tag +commit $V8_FILTER and "Gerrit-MessageType: newpatchset"
+def is_v8(message):
+    return "chromium.org" in message['from']
 
+def get_text_plain_content(message):
+    payload = message.get_payload()
+    if not message.is_multipart():
+        payload = [payload]
+
+    text = None
+    for part in payload:
+        if part.get_content_type() == 'text/plain':
+            text = part
+    if not text:
+        return None
+
+    return text.get_payload()
+
+# Check functions
+def check_regex(message, regex):
+    content = get_text_plain_content(message)
+    if not content:
+        return False
+    return re.search(regex, content) != None
+
+# XXX(mmarchini): mention checks can be more precise looking at text/html
+def check_me(message):
+    if is_github(message):
+        return check_regex(message, r"@mmarchini")
+    return False
+
+def check_all(message):
+    if is_github(message):
+        return check_regex(message, r"(?:@nodejs/collaborators)|(?:@nodejs/members)")
+    return False
+
+def check_diag(message):
+    if is_github(message):
+        return check_regex(message, r"@nodejs/diagnostics")
+    return False
+
+def check_build(message):
+    if is_github(message):
+        return check_regex(message, r"@nodejs/build")
+    return False
+
+def check_lgtm(message):
+    if is_github(message):
+        return check_regex(message, r".* approved this pull request.")
+    return False
+
+def check_merged(message):
+    if is_github(message):
+        return check_regex(message, r"Merged #[0-9]+")
+    elif is_v8(message):
+       return check_regex(message, r"Gerrit-MessageType: merged")
+    return False
+
+def check_closed(message):
+    if is_github(message):
+        return check_regex(message, r"Closed #[0-9]+")
+    return False
+
+def check_reopen(message):
+    if is_github(message):
+        return check_regex(message, r"Reopened #[0-9]+")
+    return False
+
+def check_commit(message):
+    if is_github(message):
+        return check_regex(message, r".* pushed [0-9]+ commit[s]*\.")
+    elif is_v8(message):
+       return check_regex(message, r"Gerrit-MessageType: newpatchset")
+    return False
+
+TAGS = {
+    # Mentions
+    "@me": check_me,
+    "@all": check_all,
+    "@diag": check_diag,
+    "@build": check_build,
+    # Actions
+    "lgtm": check_lgtm,
+    "closed": check_closed,
+    "merged": check_merged,
+    "reopen": check_reopen,
+    "commit": check_commit,
+}
+
+db = notmuch.Database(mode=notmuch.Database.MODE.READ_WRITE)
+
+for folder in FOLDERS:
+    query = db.create_query('folder:%s' % folder)
+    for notmuch_message in query.search_messages():
+        with open(notmuch_message.get_filename(), 'r') as f:
+            message = Parser().parse(f)
+        for tag, check in TAGS.iteritems():
+            if check(message):
+                notmuch_message.add_tag(tag)
