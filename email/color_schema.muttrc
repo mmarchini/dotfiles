@@ -1,0 +1,102 @@
+# mutt color scheme
+
+###########
+# General #
+###########
+
+color  normal      default default         # default colours
+color   index      red default ~N          # new messages
+color   index      green default ~F        # flagged messages
+color   index      blue default ~T         # tagged messages
+color   index      cyan default ~D         # deleted messages
+color  body        brightyellow default    (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+
+color  body        brightgreen default     [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
+color  attachment  magenta default         # attachments
+color  signature   brightwhite default     # sigs
+color   search     brightred black         # highlight results
+
+color  indicator   default color8    # currently highlighted message
+color  error       red default             # error messages
+color  status      white black             # status line
+color  tree        brightblack default     # thread tree
+color   tilde      cyan default            # blank line padding
+
+color  hdrdefault  default default         # default headers
+color   header     brightcyan default      "^From:"
+color   header     brightcyan default      "^Subject:"
+
+color  quoted      cyan default            # quote colours
+color   quoted1    brightcyan default
+color   quoted2    blue default
+color   quoted3    green default
+color   quoted4    yellow default
+color   quoted5    red default
+
+color  body        green default           "^gpg: Good signature from"
+color  body        brightred default       "^gpg: Bad signature from"
+color  body        brightred default       "^gpg: BAD signature from"
+color  body        brightred default       "^gpg: Note: This key has expired!"
+color  body        brightyellow default    "^gpg: WARNING: This key is not certified with a trusted signature!"
+color  body        brightyellow default    "^gpg:          There is no indication that the signature belongs to the owner."
+color  body        brightyellow default    "^gpg: can't handle these multiple signatures"
+color  body        brightyellow default    "^gpg: signature verification suppressed"
+color  body        brightyellow default    "^gpg: invalid node with packet of type"
+
+#########
+# Index #
+#########
+
+color index        color8 default '.*'
+color index_number color8 default
+color index_author yellow default '.*'
+color index_subject default default '.*'
+color index_date magenta default
+color index_flags default red '~F'
+
+###########
+# Sidebar #
+###########
+
+# Highest priority
+color sidebar_indicator green   default    # Mailbox is open
+color sidebar_highlight default yellow     # Mailbox is highlighted
+color sidebar_spoolfile default default    # Mailbox is the spoolfile (receives incoming mail)
+color sidebar_new       default default    # Mailbox contains new mail
+color sidebar_flagged   default default    # Mailbox contains flagged mail
+color sidebar_ordinary  color8  default    # Mailbox does not match above
+# Lowest priority
+
+color sidebar_divider   color8  default         # Dark grey
+
+#############################
+# Patch Syntax Highlighting #
+#############################
+
+#color   normal  white           default
+color   body    brightwhite     default         ^[[:space:]].*
+color   body    yellow          default         ^(diff).*
+#color   body    white           default         ^[\-\-\-].*
+#color   body    white           default         ^[\+\+\+].*
+#color   body    green           default         ^[\+].*
+#color   body    red             default         ^[\-].*
+#color   body    brightblue      default         [@@].*
+color   body    brightwhite     default         ^(\s).*
+color   body    cyan            default         ^(Signed-off-by).*
+color   body    brightwhite     default         ^(Cc)
+color   body    yellow          default         "^diff \-.*"
+color   body    brightwhite     default         "^index [a-f0-9].*"
+color   body    brightblue      default         "^---$"
+color   body    white           default         "^\-\-\- .*"
+color   body    white           default         "^[\+]{3} .*"
+color   body    green           default         "^[\+][^\+]+.*"
+color   body    red             default         "^\-[^\-]+.*"
+color   body    brightblue      default         "^@@ .*"
+color   body    green           default         "LGTM"
+color   body    brightmagenta   default         "-- Commit Summary --"
+color   body    brightmagenta   default         "-- File Changes --"
+color   body    brightmagenta   default         "-- Patch Links --"
+color   body    green           default         "^Merged #.*"
+color   body    red             default         "^Closed #.*"
+color   body    brightblue      default         "^Reply to this email.*"
+
+color index_tags default default
