@@ -11,5 +11,4 @@ echo "Running..." >> ~/.mutt/log/cron.mbsync.log;
 /usr/local/bin/notmuch new                             2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
 
 # Apply notmuch tags
-/bin/bash ~/.mutt/scripts/tag-mailboxes                2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
-
+/usr/local/bin/python2 ~/.mutt/scripts/tag-mailboxes   2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
