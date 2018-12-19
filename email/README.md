@@ -7,12 +7,19 @@ E-mail related configurations and scripts.
   - neomutt
   - notmuch
   - mbsync
-  - Python 3
+  - Python 2 and 3
 
 ## Install
 
+1. Create symbolic links:
+
 ```bash
-mkdir -p ~/.mutt
-ln -s $(pwd)/scripts ~/.mutt/
-ln -s $(pwd)/color_schema.muttrc ~/.mutt/color_schema.muttrc
+ln -s $(pwd)/.mutt ~/.mutt
+mkdir ~/.mutt/log/
+ln -s $(pwd)/.muttrc ~/.muttrc
+ln -s $(pwd)/.mbsyncrc ~/.mbsyncrc
 ```
+
+2. Add encrypted secrets to `~/.mutt/secrets/`.
+
+3. Add `*/5 * * * * ~/.mutt/scripts/sync-mailboxes` to the user's crontab.

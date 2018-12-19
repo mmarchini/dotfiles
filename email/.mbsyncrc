@@ -1,0 +1,45 @@
+#############
+# mmarchini #
+#############
+
+IMAPAccount mmarchini
+Host imap.gmail.com
+User mat@mmarchini.me
+PassCmd "/usr/local/bin/gpg -q --for-your-eyes-only --no-tty -d ~/.mutt/secrets/imap/mmarchini.gpg"
+SSLType IMAPS
+AuthMechs LOGIN
+CertificateFile /usr/local/etc/openssl/cert.pem
+
+IMAPStore mmarchini-remote
+Account mmarchini
+
+MaildirStore mmarchini-local
+Path ~/.mailbox/mmarchini/
+Inbox ~/.mailbox/mmarchini/inbox
+
+Channel mmarchini-inbox
+Master :mmarchini-remote:
+Slave :mmarchini-local:
+Patterns "INBOX"
+
+Channel mmarchini-all
+Master :mmarchini-remote:"[Gmail]/All Mail"
+Slave :mmarchini-local:all
+
+Channel mmarchini-sent
+Master :mmarchini-remote:"[Gmail]/Sent Mail"
+Slave :mmarchini-local:sent
+
+Channel mmarchini-trash
+Master :mmarchini-remote:"[Gmail]/Trash"
+Slave :mmarchini-local:trash
+
+Create Both
+Expunge Both
+SyncState *
+
+Group mmarchini
+Channel mmarchini-inbox
+Channel mmarchini-all
+Channel mmarchini-sent
+Channel mmarchini-trash

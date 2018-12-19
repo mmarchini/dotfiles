@@ -1,0 +1,20 @@
+set from      = "mat@mmarchini.me"
+set realname  = "Matheus Marchini"
+
+source          "gpg -q --decrypt ~/.mutt/secrets/smtp/mmarchini.gpg|"
+
+set folder    = "~/.mailbox"
+set mbox      = "+mmarchini/inbox"
+set postponed = "+mmarchini/drafts"
+
+color status magenta default
+
+macro index A \
+    "<tag-prefix><save-message>+mmarchini/all<enter>" \
+    "archive message"
+
+macro index D \
+    "<tag-prefix><save-message>+mmarchini/trash<enter>" \
+    "move message to the trash"
+
+macro index G "!mbsync mmarchini ^M" "Update through mbsync"

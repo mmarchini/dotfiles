@@ -1,0 +1,91 @@
+########
+# SMTP #
+########
+
+set smtp_authenticators = "login"
+set ssl_force_tls = yes
+
+#############
+# Mailboxes #
+#############
+
+set folder    = "~/.mailbox"
+
+source ~/.mutt/accounts/mmarchini
+set spoolfile = "+mmarchini/inbox"
+
+folder-hook mmarchini/*  source ~/.mutt/accounts/mmarchini
+
+############
+# Settings #
+############
+
+set editor=vim
+set display_filter='~/.mutt/scripts/display-filter'
+
+# Threads
+set sort="threads"
+set strict_threads="yes"
+set sort_browser="date"
+set sort_aux="last-date-received"
+set collapse_unread
+set wrap=80
+set smart_wrap
+
+###########
+# Sidebar #
+###########
+
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+sidebar_whitelist mmarchini/inbox
+
+bind index,pager \CP sidebar-prev       # Ctrl-Shift-P - Previous Mailbox
+bind index,pager \CN sidebar-next       # Ctrl-Shift-N - Next Mailbox
+bind index,pager \CO sidebar-open       # Ctrl-Shift-O - Open Highlighted Mailbox
+
+set query_command = "notmuch address %s | fzf-tmux"
+bind editor <Tab> complete-query
+bind editor ^T complete
+set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"
+
+#############
+# Mailboxes #
+#############
+
+mailboxes \
+  "+mmarchini/inbox"  \
+  "+mmarchini/all"    \
+  "+mmarchini/sent"   \
+  "+mmarchini/trash"  \
+
+set nm_default_uri = "notmuch:///Users/mmarchini/.mailbox"
+set virtual_spoolfile=yes
+# TODO(mmarchini) move queries to notmuch config
+virtual-mailboxes "personal" "notmuch://?query=folder:mmarchini/inbox and NOT ((from:github.com and (subject:\"^[nodejs/\" or subject:\"^[iovisor/\")) or from:chromium.org or to:iovisor-dev@lists.iovisor.org or from:lwn@lwn.net)"
+virtual-mailboxes "nodejs" "notmuch://?query=folder:mmarchini/inbox and from:github.com and subject:\"^[nodejs/\""
+virtual-mailboxes "iovisor" "notmuch://?query=folder:mmarchini/inbox  and ((from:github.com and subject:\"^[iovisor/\") or (to:iovisor-dev@lists.iovisor.org))"
+virtual-mailboxes "V8" "notmuch://?query=folder:mmarchini/inbox and from:chromium.org"
+virtual-mailboxes "LWN" "notmuch://?query=folder:mmarchini/inbox and from:lwn@lwn.net"
+
+################
+# Color Schema #
+################
+
+set hidden_tags = "unread,draft,flagged,passed,replied,attachment,signed,encrypted,inbox"
+set index_format = "%4C {%-15.15g} [%Z] %[%b %d %H:%M] %-15.15L %s"
+
+source ~/.mutt/color_schema.muttrc
+
+# subjectrx 'Re: *' '%L%R'
+set hide_missing = no
+set narrow_tree = yes
+set reply_regexp = "^[Rr][Ee]:[ \t]*"
+
+###############
+# Keybindings #
+###############
+
+set wait_key = no
+macro index,pager <Esc>M "<pipe-message>/Users/mmarchini/.mutt/scripts/mute-github-thread<enter><Esc>t"
