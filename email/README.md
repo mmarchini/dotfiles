@@ -8,6 +8,7 @@ E-mail related configurations and scripts.
   - notmuch
   - mbsync
   - Python 2 and 3
+  - ydiff
 
 ## Install
 

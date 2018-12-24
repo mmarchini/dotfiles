@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+PR_ID=$(grep "Message-ID:" | grep pull | awk 'BEGIN { FS="[/@]" } { print $4 }');
+
+if test -z "$PR_ID"
+then
+  echo "Couldn't find Pull Request ID" > /dev/stderr
+  exit 1
+fi
+
+curl -sL https://github.com/nodejs/node/pull/$PR_ID.diff | ydiff -s --wide -w 0
