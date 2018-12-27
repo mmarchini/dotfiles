@@ -2,12 +2,14 @@
 
 set -e
 
-PR_ID=$(grep "Message-ID:" | grep pull | awk 'BEGIN { FS="[/@]" } { print $4 }');
+maybe_pr_info=$(grep "Message-ID:" | grep pull | awk 'BEGIN { FS="[/@<]" } { printf("%s %s %s", $2, $3, $5); }');
 
-if test -z "$PR_ID"
+if test -z "$maybe_pr_info"
 then
   echo "Couldn't find Pull Request ID" > /dev/stderr
   exit 1
 fi
 
-curl -sL https://github.com/nodejs/node/pull/$PR_ID.diff | ydiff -s --wide -w 0
+IFS=' ' read -r -a pr_info <<< "$maybe_pr_info"
+
+curl -sL https://github.com/${pr_info[0]}/${pr_info[1]}/pull/${pr_info[2]}.diff | ydiff -s --wide -w 0
