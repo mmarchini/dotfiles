@@ -48,6 +48,7 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='vim'
 
+export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/Library/Python/3.6/bin:$PATH
 export PATH=$HOME/go/bin:$PATH

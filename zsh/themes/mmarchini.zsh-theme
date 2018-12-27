@@ -22,7 +22,7 @@ function get_right_prompt() {
   echo "$(virtualenv_prompt_info)$(nvm_prompt_info)[%{${fg_bold[cyan]}%}%*%{$reset_color%}]"
 }
 
-PROMPT=$'\n'$STATUS'\
+PROMPT=$'\n'$STATUS'$(ps1_exec_async > /dev/null 2>/dev/null &)\
  %{$fg_no_bold[magenta]%}[$(get_pwd)]\
  $(git_prompt_info)
  %{$fg_bold[cyan]%}→ %{$reset_color%}'

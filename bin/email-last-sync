@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# set -e;
+
+now=$(date +%s)
+last_sync=$(cat ~/.mutt/.last-sync)
+
+let elapsed=now-last_sync
+let total_minutes=elapsed/60
+let hours=total_minutes/60
+let hours_minutes=hours*60
+let minutes=total_minutes-hours_minutes
+
+echo $hours:$minutes
