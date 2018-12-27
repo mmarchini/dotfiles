@@ -7,7 +7,7 @@ if [ -n "$DIRTY_FILES" ]; then
   echo "WARNING: dotfiles folder is dirty";
 fi;
 
-OUT_OF_SYNC="$(cd $DOTFILES_PATH && git rev-list -n 1 HEAD@{upstream}..HEAD)"
+OUT_OF_SYNC="$(cd $DOTFILES_PATH && git rev-list -n 1 HEAD@{upstream}..HEAD)$(cd $DOTFILES_PATH && git rev-list -n 1 HEAD..HEAD@{upstream})"
 if [ -n "$OUT_OF_SYNC" ]; then
   echo "WARNING: dotfiles folder is out of sync";
 fi;
