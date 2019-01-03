@@ -67,6 +67,16 @@ def check_lgtm(message):
         return check_regex(message, r".* approved this pull request.")
     return False
 
+def check_code_comment(message):
+    if is_github(message):
+        return check_regex(message, r".* commented on this pull request.")
+    return False
+
+def check_requested_changes(message):
+    if is_github(message):
+        return check_regex(message, r".* requested changes on this pull request.")
+    return False
+
 def check_merged(message):
     if is_github(message):
         return check_regex(message, r"Merged #[0-9]+")
@@ -103,6 +113,8 @@ TAGS = {
     "merged": check_merged,
     "reopen": check_reopen,
     "commit": check_commit,
+    "codecomment": check_code_comment,
+    "X": check_requested_changes,
 }
 
 db = notmuch.Database(mode=notmuch.Database.MODE.READ_WRITE)
