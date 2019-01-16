@@ -98,5 +98,7 @@ color   body    brightmagenta   default         "-- Patch Links --"
 color   body    green           default         "^Merged #.*"
 color   body    red             default         "^Closed #.*"
 color   body    brightblue      default         "^Reply to this email.*"
+color   body    brightblue      default         "@[a-zA-Z0-9_/-]+"
+color   body    brightgreen      default         "@mmarchini"
 
 color index_tags default default
