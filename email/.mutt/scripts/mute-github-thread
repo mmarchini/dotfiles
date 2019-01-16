@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 
+import os
+from os.path import expanduser
+import re
 import sys
 import logging
+import urllib
+from base64 import b64encode
 from os.path import expanduser
 from email.parser import Parser
 from email.policy import default
 from urllib.parse import urlparse
 from http.client import HTTPSConnection
+from http.cookiejar import domain_match
 
 log = logging.getLogger("mute_threads")
 log.setLevel(logging.DEBUG)
@@ -18,6 +24,37 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 fh.setFormatter(formatter)
 log.addHandler(ch)
 log.addHandler(fh)
+
+
+# Implementation from depot_tools
+def get_gerrit_auth(host):
+    path = expanduser("~/.gitcookies")
+    if not os.path.exists(path):
+        return None
+
+    try:
+        f = open(path, 'r')
+    except IOError:
+        return None
+
+    with f:
+        for line in f:
+            fields = line.strip()
+            fields = fields.split('\t')
+            if line.strip().startswith('#') or len(fields) != 7:
+                continue
+            domain, xpath, key, value = fields[0], fields[2], fields[5], fields[6]
+            if xpath == '/' and key == 'o':
+                if value.startswith('git-'):
+                    login, secret_token = value.split('=', 1)
+                    if domain_match(host, domain):
+                        s = '%s:%s' % (login, secret_token)
+                        return 'Basic %s' % b64encode(s.encode()).decode()
+                else:
+                    if domain_match(host, domain):
+                        return 'Bearer %s' % value
+    return None
+
 
 def mute_github_thread(message):
     unsubscribe_url = None
@@ -47,9 +84,57 @@ def mute_github_thread(message):
     log.info("Unsubscribed from '%s'" % message['subject'])
 
 
+def mute_gerrit_change(message):
+    body = message.get_body(preferencelist=('plain', 'html')).get_content()
+    result = re.search("Gerrit-Change-Id: (.*)", body)
+    if not result:
+        log.error("Couldn't find Change-ID.")
+        sys.exit(1)
+    change_id = result[1].strip()
+
+    result = re.search("Gerrit-Project: (.*)", body)
+    if not result:
+        log.error("Couldn't find Project.")
+        sys.exit(1)
+    project = urllib.parse.quote_plus(result[1].strip())
+
+    result = re.search("Gerrit-Branch: (.*)", body)
+    if not result:
+        log.error("Couldn't find Branch.")
+        sys.exit(1)
+    branch = urllib.parse.quote_plus(result[1].strip())
+
+    full_change_id = "%s~%s~%s" % (project, branch, change_id)
+
+    domain = 'chromium-review.googlesource.com'
+    headers = { "Authorization" : get_gerrit_auth(domain) }
+    c = HTTPSConnection(domain)
+    c.request('PUT', "/a/changes/%s/ignore" % full_change_id, headers=headers)
+
+    res = c.getresponse()
+    if res.status >= 400:
+       log.error("Error unsubscribing from '%s'" % message['subject'])
+       log.error(res.read())
+       sys.exit(2)
+
+
+# Do the Unix double-fork magic; see Stevens's book "Advanced
+# Programming in the UNIX Environment" (Addison-Wesley) for details
+try:
+    pid = os.fork()
+    if pid > 0:
+        # Exit first parent
+        sys.exit(0)
+except OSError as e:
+    log.error("fork #1 failed: %d (%s)" % (e.errno, e.strerror))
+    sys.exit(1)
+
 message = Parser(policy=default).parse(sys.stdin)
 
 # Mute GitHub thread
-thread_id = None
 if message['from'].addresses[0].domain == "github.com":
     mute_github_thread(message)
+
+# Mute Gerrit Change
+if message['from'].addresses[0].domain == "chromium.org":
+    mute_gerrit_change(message)
