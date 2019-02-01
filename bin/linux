@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if ! vboxmanage showvminfo "Ubuntu" | grep "running (since" > /dev/null; then
+  VBoxManage startvm Ubuntu --type headless;
+else
+  echo "Ubuntu already running";
+fi
+
+ssh -p 2235 -o "ForwardAgent yes" mmarchini@localhost
