@@ -1,7 +1,20 @@
 #!/usr/bin/env zsh
 
-local HOSTNAME="/%m/"
-local STATUS="%(?,%{$fg_bold[green]%}$HOSTNAME,%{$fg_bold[red]%}$HOSTNAME)"
+local STATUS_LEFT="%(?,%{$fg_bold[green]%}/,%{$fg_bold[red]%}/)"
+local STATUS_RIGHT="%(?,%{$fg_bold[green]%}/,%{$fg_bold[red]%}/)"
+
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  STATUS_LEFT="%{$fg_bold[blue]%}{%{$reset_color%}"
+  STATUS_RIGHT="%{$fg_bold[blue]%}}%{$reset_color%}"
+else
+  case $(ps -o comm= -p $PPID) in sshd|*/sshd)
+    STATUS_LEFT="%{$fg_bold[blue]%}{%{$reset_color%}"
+    STATUS_RIGHT="%{$fg_bold[blue]%}}%{$reset_color%}"
+  esac
+fi
+
+local HOSTNAME="%m"
+local STATUS="$STATUS_LEFT%(?,%{$fg_bold[green]%}$HOSTNAME,%{$fg_bold[red]%}$HOSTNAME)%{$reset_color%}$STATUS_RIGHT"
 
 function get_pwd(){
   git_root=$PWD
@@ -23,7 +36,7 @@ function get_right_prompt() {
 }
 
 PROMPT=$'\n'$STATUS'$(ps1_exec_async > /dev/null 2>/dev/null &)\
- %{$fg_no_bold[magenta]%}[$(get_pwd)]\
+ %{$fg_no_bold[yellow]%}$(get_pwd)\
  $(git_prompt_info)
  %{$fg_bold[cyan]%}→ %{$reset_color%}'
 
@@ -31,7 +44,7 @@ RPROMPT='$(get_right_prompt)'
 
 # Format for git_prompt_info()
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-ZSH_THEME_GIT_PROMPT_PREFIX="at %{$fg[blue]%} "
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_no_bold[white]%}at %{$fg[blue]%} "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[yellow]%} ✔"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%} ✔"
