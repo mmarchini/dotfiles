@@ -21,4 +21,4 @@ date +%s > ~/.mutt/.last-sync
 /usr/local/bin/notmuch new                             2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
 
 # Apply notmuch tags
-/usr/local/bin/python2 ~/.mutt/scripts/tag-mailboxes   2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
+/usr/bin/python ~/.mutt/scripts/tag-mailboxes          2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;

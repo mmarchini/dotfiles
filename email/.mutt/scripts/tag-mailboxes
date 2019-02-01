@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2
+#!/usr/bin/python
 
 # TODO(mmarchini) option to clear tags
 # TODO(mmarchini) log and handle errors
