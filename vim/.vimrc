@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'morhetz/gruvbox'
   Plug 'flazz/vim-colorschemes'
   Plug 'felixhummel/setcolors.vim'
+  Plug 'luochen1990/rainbow'
 
   Plug 'vim-scripts/ctags.vim'
 
@@ -68,6 +69,7 @@ let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 let g:vim_markdown_folding_disabled = 1
 let g:focusmode_width = 90
+let g:rainbow_active = 1
 
 syn on
 set background=dark
