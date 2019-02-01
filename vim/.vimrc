@@ -13,6 +13,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'w0rp/ale'
 
+  Plug 'maximbaz/lightline-ale'
+
   Plug 'scrooloose/nerdcommenter'
 
   Plug 'tpope/vim-fugitive'
@@ -70,6 +72,41 @@ let g:strip_whitespace_on_save=1
 let g:vim_markdown_folding_disabled = 1
 let g:focusmode_width = 90
 let g:rainbow_active = 1
+
+let g:ale_open_list = 1
+
+let g:ale_echo_msg_format = '%linter% says %s'
+
+let g:ale_linters = {
+\   'python': ['pyflakes'],
+\   'c': [],
+\   'cpp' : [],
+\}
+
+" BEGIN Lightline ALE integration
+let g:lightline = {}
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+
+let g:lightline.active = {
+  \ 'right': [
+  \   [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+  \   [ 'lineinfo' ],
+  \   [ 'percent' ],
+  \   [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ] }
+" END
 
 syn on
 set background=dark
