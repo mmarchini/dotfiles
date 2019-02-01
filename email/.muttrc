@@ -89,8 +89,7 @@ set reply_regexp = "^[Rr][Ee]:[ \t]*"
 ###############
 
 set wait_key = no
-macro index,pager <Esc>M "<pipe-message>~/.mutt/scripts/mute-github-thread<enter><Esc>t"
-macro index,pager <Esc>r "<pipe-message>~/.mutt/scripts/open-github-diff<enter>"
+macro index,pager B      "<pipe-message>~/.mutt/scripts/mute-github-thread<enter><Esc>t"
 
 macro index,pager <Esc>r "<pipe-message>~/.mutt/scripts/open-github-diff<enter>"
 macro index,pager <Esc>w "<modify-tags>!watch<enter>"
