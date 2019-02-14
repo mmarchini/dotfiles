@@ -6,4 +6,4 @@ else
   echo "Ubuntu already running";
 fi
 
-ssh -p 2235 -o "ForwardAgent yes" mmarchini@localhost
+ssh -p 2235 mmarchini@localhost
