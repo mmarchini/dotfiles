@@ -23,4 +23,9 @@ ln -s $(pwd)/.mbsyncrc ~/.mbsyncrc
 
 2. Add encrypted secrets to `~/.mutt/secrets/`.
 
-3. Add `*/5 * * * * ~/.mutt/scripts/sync-mailboxes` to the user's crontab.
+3. Add to the user's crontab:
+
+```
+*/5 * * * * ~/.mutt/scripts/sync-mailboxes
+*/1 * * * * ~/.bin/tmux-set-left-statusbar
+```
