@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for i in {0..6}; do
+  d=$(date -v -${i}d "+%Y-%m-%d");
+  echo "${d}: $(notmuch search --output=messages date:${d} | wc -l)";
+done
