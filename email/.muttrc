@@ -21,7 +21,7 @@ folder-hook mmarchini/*  source ~/.mutt/accounts/mmarchini
 ############
 
 set editor=vim
-set display_filter='~/.mutt/scripts/display-filter'
+# set display_filter='~/.mutt/scripts/display-filter'
 
 # Threads
 set sort="threads"
