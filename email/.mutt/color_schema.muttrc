@@ -7,8 +7,6 @@
 color  normal      default default         # default colours
 color   index      red default ~N          # new messages
 color   index      green default ~F        # flagged messages
-color   index      blue default ~T         # tagged messages
-color   index      cyan default ~D         # deleted messages
 color  body        brightyellow default    (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+
 color  body        brightgreen default     [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
 color  attachment  magenta default         # attachments
@@ -46,12 +44,26 @@ color  body        brightyellow default    "^gpg: invalid node with packet of ty
 # Index #
 #########
 
-color index        color8 default '.*'
-color index_number color8 default
-color index_author yellow default '.*'
-color index_subject default default '.*'
-color index_date magenta default
-color index_flags default red '~F'
+color index          color8 default  '.*'
+color index_number   color8 default
+color index_author   yellow default  '.*'
+color index_subject  default default '.*'
+color index_date     magenta default
+color index_flags    default red     '~F'
+
+# Node.js mailing lists
+
+color index_subject  black default    ~T  # deleted messages
+
+# IO Visor Mailing Lists
+color index_subject  blue   default           '~s \\\[iovisor/bpftrace\\\]'  # tagged messages
+color index_subject  brightblue default       '~T ~s \\\[iovisor/bpftrace\\\]'  # tagged messages
+color index_subject  green  default           '~s \\\[iovisor/bcc\\\]'  # tagged messages
+color index_subject  brightgreen  default     '~T ~s \\\[iovisor/bcc\\\]'  # tagged messages
+color index_subject  yellow default           '~s \\\[iovisor-dev\\\]'  # tagged messages
+color index_subject  brightyellow default     '~T ~s \\\[iovisor-dev\\\]'  # tagged messages
+
+color index_subject  brightblack default    ~D  # deleted messages
 
 ###########
 # Sidebar #
