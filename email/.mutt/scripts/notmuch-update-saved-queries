@@ -1,0 +1,11 @@
+#!/bin/bash
+
+/usr/local/bin/notmuch config list | grep query | awk -F= '{ print $1 }' | xargs -L1 /usr/local/bin/notmuch config set
+/usr/local/bin/notmuch config set query.inbox "folder:mmarchini/inbox"
+/usr/local/bin/notmuch config set query.github "from:github.com"
+/usr/local/bin/notmuch config set query.watch "query:inbox AND thread:{tag:watch}"
+/usr/local/bin/notmuch config set query.nodejs "query:inbox AND query:github AND (subject:\"^[nodejs/\" OR subject:\"^[libuv/\") AND NOT query:watch"
+/usr/local/bin/notmuch config set query.iovisor "query:inbox AND ((query:github and subject:\"^[iovisor/\") or (to:iovisor-dev@lists.iovisor.org)) AND NOT thread:{tag:watch}"
+/usr/local/bin/notmuch config set query.v8 "query:inbox AND from:chromium.org AND NOT query:watch"
+/usr/local/bin/notmuch config set query.lwn "query:inbox AND from:lwn@lwn.net and NOT query:watch"
+/usr/local/bin/notmuch config set query.personal "query:inbox AND NOT (query:nodejs OR query:iovisor OR query:v8 OR query:lwn OR query:watch)"

@@ -62,13 +62,12 @@ mailboxes \
 
 set nm_default_uri = "notmuch:///Users/mmarchini/.mailbox"
 set virtual_spoolfile=yes
-# TODO(mmarchini) move queries to notmuch config
-virtual-mailboxes "personal" "notmuch://?query=folder:mmarchini/inbox and NOT (thread:{tag:watch} or (from:github.com and (subject:\"^[nodejs/\" or subject:\"^[iovisor/\")) or from:chromium.org or to:iovisor-dev@lists.iovisor.org or from:lwn@lwn.net)"
-virtual-mailboxes "nodejs" "notmuch://?query=folder:mmarchini/inbox and from:github.com and subject:\"^[nodejs/\" and NOT thread:{tag:watch}"
-virtual-mailboxes "iovisor" "notmuch://?query=folder:mmarchini/inbox  and ((from:github.com and subject:\"^[iovisor/\") or (to:iovisor-dev@lists.iovisor.org)) and NOT thread:{tag:watch}"
-virtual-mailboxes "V8" "notmuch://?query=folder:mmarchini/inbox and from:chromium.org and NOT thread:{tag:watch}"
-virtual-mailboxes "LWN" "notmuch://?query=folder:mmarchini/inbox and from:lwn@lwn.net and NOT thread:{tag:watch}"
-virtual-mailboxes "Watch" "notmuch://?query=folder:mmarchini/inbox and thread:{tag:watch}"
+virtual-mailboxes "personal" "notmuch://?query=query:personal"
+virtual-mailboxes "nodejs" "notmuch://?query=query:nodejs"
+virtual-mailboxes "iovisor" "notmuch://?query=query:iovisor"
+virtual-mailboxes "V8" "notmuch://?query=query:v8"
+virtual-mailboxes "LWN" "notmuch://?query=query:lwn"
+virtual-mailboxes "Watch" "notmuch://?query=query:watch"
 
 ################
 # Color Schema #

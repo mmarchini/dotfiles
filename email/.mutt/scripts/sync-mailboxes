@@ -13,12 +13,15 @@ echo "Running" >> ~/.mutt/log/cron.mbsync.log;
 
 # Sync e-mails
 # TODO(mmarchini) get accounts from config or from accounts folder
-/usr/local/bin/mbsync -V mmarchini                     2>> ~/.mutt/log/mbsync.mmarchini.log >> ~/.mutt/log/mbsync.mmarchini.log
+/usr/local/bin/mbsync -V mmarchini                                  2>> ~/.mutt/log/mbsync.mmarchini.log >> ~/.mutt/log/mbsync.mmarchini.log
 
 date +%s > ~/.mutt/.last-sync
 
 # Update notmut index
-/usr/local/bin/notmuch new                             2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
+/usr/local/bin/notmuch new                                          2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
 
 # Apply notmuch tags
-/usr/bin/python ~/.mutt/scripts/tag-mailboxes          2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
+/usr/bin/python ~/.mutt/scripts/tag-mailboxes                       2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
+
+# Update saved queries
+~/.mutt/scripts/notmuch-update-saved-queries                       2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
