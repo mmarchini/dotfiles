@@ -11,6 +11,9 @@ fi
 
 echo "Running" >> ~/.mutt/log/cron.mbsync.log;
 
+# Cleanup watch tags from archived messages
+/usr/local/bin/notmuch tag -watch tag:watch -folder:mmarchini/inbox 2>> ~/.mutt/log/notmuch.log >> ~/.mutt/log/notmuch.log;
+
 # Sync e-mails
 # TODO(mmarchini) get accounts from config or from accounts folder
 /usr/local/bin/mbsync -V mmarchini                                  2>> ~/.mutt/log/mbsync.mmarchini.log >> ~/.mutt/log/mbsync.mmarchini.log
