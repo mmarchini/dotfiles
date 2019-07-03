@@ -13,6 +13,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 ln -s $(pwd)/themes/mmarchini.zsh-theme \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/mmarchini.zsh-theme
 ln -s $(pwd)/.zsh-aliases ~/.zsh-aliases
+mv ~/.zshrc ~/.zshrc.bkp
 ln -s $(pwd)/.zshrc ~/.zshrc
 ```
 
