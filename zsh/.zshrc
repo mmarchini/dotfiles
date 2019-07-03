@@ -71,3 +71,6 @@ export GPG_TTY=$(tty)
 
 # required for Ctrl-O to work with neomutt
 stty discard undef
+
+# added by travis gem
+[ -f /home/mmarchini/.travis/travis.sh ] && source /home/mmarchini/.travis/travis.sh
