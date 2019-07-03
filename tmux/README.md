@@ -5,6 +5,7 @@
 ## Install
 
 ```bash
+sudo apt install tmux
 mkdir -p ~/.tmux/plugins/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ln -s $(pwd)/.tmux.conf ~/.tmux.conf
