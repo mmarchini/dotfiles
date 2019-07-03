@@ -8,4 +8,4 @@ if test "$GPG_STATUS" = "gtg"; then
   GPG_COLOR="colour2"
 fi;
 
-/usr/local/bin/tmux set -g status-left "#[bg=colour8,fg=colour7] Last sync $EMAIL_LAST_SYNC ago #[bg=$GPG_COLOR,fg=colour8]#[bg=$GPG_COLOR,fg=colour0] GPG: $GPG_STATUS #[fg=$GPG_COLOR,bg=default] "
+/snap/bin/tmux set -g status-left "#[bg=colour8,fg=colour7] Last sync $EMAIL_LAST_SYNC ago #[bg=$GPG_COLOR,fg=colour8]#[bg=$GPG_COLOR,fg=colour0] GPG: $GPG_STATUS #[fg=$GPG_COLOR,bg=default] "
