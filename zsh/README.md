@@ -15,5 +15,8 @@ ln -s $(pwd)/themes/mmarchini.zsh-theme \
 ln -s $(pwd)/.zsh-aliases ~/.zsh-aliases
 mv ~/.zshrc ~/.zshrc.bkp
 ln -s $(pwd)/.zshrc ~/.zshrc
+
+# Some commonly used CLI tools
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 ```
 
