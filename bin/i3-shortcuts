@@ -1,0 +1,3 @@
+#!/bin/bash
+
+egrep ^bind ~/.config/i3/config | cut -f 1 -d ' ' --complement | sed 's/\$mod/Super/' | sed 's/ /^/' | column -s^ -t | rofi -dmenu
