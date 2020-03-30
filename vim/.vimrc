@@ -24,7 +24,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
 
   Plug 'vim-scripts/MultipleSearch'
-  Plug 'rrethy/vim-illuminate'
+  " Plug 'rrethy/vim-illuminate'
 
   " Plug 'valloric/youcompleteme'
 
@@ -43,11 +43,19 @@ call plug#begin('~/.vim/plugged')
   Plug 'morhetz/gruvbox'
   Plug 'flazz/vim-colorschemes'
   Plug 'felixhummel/setcolors.vim'
-  Plug 'luochen1990/rainbow'
+  " Plug 'luochen1990/rainbow'
 
   Plug 'vim-scripts/ctags.vim'
 
+  " Uncomment if developing
+  Plug '~/workspace/mmarchini/bpftrace.vim'
+
   Plug 'pangloss/vim-javascript'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'rhysd/vim-llvm'
+  Plug 'supercollider/scvim'
+
+  Plug 'leafgarland/typescript-vim'
 
   " Plugin outside ~/.vim/plugged with post-update hook
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -62,10 +70,11 @@ nmap <leader>. :Tags<CR>
 nmap <leader>bb :belowright :terminal npm install<CR>
 
 let g:gruvbox_contrast_dark='hard'
-colorscheme Benokai
+colorscheme Atelier_DuneDark
 " colorscheme iceberg
 
 let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
 
 let g:strip_whitespace_confirm=0
 let g:better_whitespace_enabled=1
@@ -73,6 +82,8 @@ let g:strip_whitespace_on_save=1
 let g:vim_markdown_folding_disabled = 1
 let g:focusmode_width = 90
 let g:rainbow_active = 1
+
+let g:vim_jsx_pretty_colorful_config = 1
 
 let g:ale_open_list = 1
 
@@ -86,6 +97,10 @@ let g:ale_linters = {
 
 " BEGIN Lightline ALE integration
 let g:lightline = {}
+
+let g:lightline.component = {
+      \   'tagbar': '%{tagbar#currenttag("%s", "")}',
+      \ }
 
 let g:lightline.component_expand = {
       \  'linter_checking': 'lightline#ale#checking',
@@ -102,6 +117,11 @@ let g:lightline.component_type = {
       \ }
 
 let g:lightline.active = {
+  \ 'left': [
+  \   [ 'mode', 'paste' ],
+  \   [ 'fugitive', 'filename' ],
+  \   ['ctrlpmark', 'tagbar']
+  \ ],
   \ 'right': [
   \   [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
   \   [ 'lineinfo' ],
@@ -109,17 +129,22 @@ let g:lightline.active = {
   \   [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ] }
 " END
 
+" Visual
 syn on
 set background=dark
 set number
 set nowrap
+set hlsearch
+set laststatus=2
+
+" Coding style
 set sw=2
 set expandtab
 set shiftround
-set laststatus=2
-set mouse=a
-set hlsearch
 set backspace=indent,eol,start
+
+" Other
+set mouse=a
 
 set showcmd
 set showmatch
@@ -130,3 +155,5 @@ highlight ColorColumn ctermbg=gray
 set colorcolumn=80
 
 highlight Normal ctermbg=None
+set exrc
+set secure
