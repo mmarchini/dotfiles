@@ -56,6 +56,8 @@ export PATH=$HOME/.local/bin:$PATH
 export GOPATH=$HOME/go/gopath
 export PATH=$HOME/go/bin:$GOPATH/bin:$PATH
 
+source $HOME/.cargo/env
+
 source $HOME/.zsh-aliases
 
 # nvm

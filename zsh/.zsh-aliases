@@ -7,3 +7,6 @@ nodejs() { cd $HOME/workspace/nodejs/$1 }
 # TODO(mmarchini) identify if we have pbcopy/pbpaste already
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias duh='du -sh .[!.]* *'
+alias vim="vim -p"
+alias xim="xargs -o vim -p"
