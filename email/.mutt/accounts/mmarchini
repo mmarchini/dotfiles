@@ -1,5 +1,5 @@
-set from      = "mat@mmarchini.me"
-set realname  = "Matheus Marchini"
+set from      = "mary@mmarchini.me"
+set realname  = "Mary Marchini"
 
 source          "gpg -q --decrypt ~/.mutt/secrets/smtp/mmarchini.gpg|"
 

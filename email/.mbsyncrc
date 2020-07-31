@@ -4,7 +4,7 @@
 
 IMAPAccount mmarchini
 Host imap.gmail.com
-User mat@mmarchini.me
+User mary@mmarchini.me
 PassCmd "/usr/local/bin/gpg -q --for-your-eyes-only --no-tty -d ~/.mutt/secrets/imap/mmarchini.gpg"
 SSLType IMAPS
 AuthMechs LOGIN
