@@ -1,3 +1,4 @@
 *.swp
 .ncu
 isolate-0x*.log
+tasks.json

@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'itchyny/lightline.vim'
 
-  Plug 'w0rp/ale'
+  " Plug 'w0rp/ale'
 
   Plug 'maximbaz/lightline-ale'
 
@@ -27,6 +27,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'rrethy/vim-illuminate'
 
   " Plug 'valloric/youcompleteme'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   Plug 'dietsche/vim-lastplace'
   Plug 'ntpeters/vim-better-whitespace'
@@ -56,6 +57,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'supercollider/scvim'
 
   Plug 'leafgarland/typescript-vim'
+  Plug 'sirtaj/vim-openscad'
 
   " Plugin outside ~/.vim/plugged with post-update hook
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -128,6 +130,8 @@ let g:lightline.active = {
   \   [ 'percent' ],
   \   [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ] }
 " END
+
+let g:coc_global_extensions = [ 'coc-tsserver' ]
 
 " Visual
 syn on
