@@ -16,6 +16,8 @@
 	gently-force-push = push --force-with-lease
 	sdiff = !git diff | ydiff -s -w 0 --wrap
 	exec = "!exec "
+[init]
+        defaultBranch = main
 [commit]
 	gpgsign = true
 [color]
