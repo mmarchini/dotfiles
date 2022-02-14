@@ -3,17 +3,8 @@
 # TODO(mmarchini): deduplicate
 export DOTFILES_PATH="$(dirname $(dirname ${${(%):-%N}:A}))"
 
-source "$DOTFILES_PATH/zsh/oh-my-zsh"
+for file in "${DOTFILES_PATH}/zsh/source"/*; do
+  source "$file"
+done
 
-source "$DOTFILES_PATH/helpers/sync-dotfiles"
-
-# User configuration
-
-source "$DOTFILES_PATH/zsh/zsh-aliases"
-
-source "$DOTFILES_PATH/zsh/setup-defaults"
-source "$DOTFILES_PATH/zsh/setup-runtimes"
-source "$DOTFILES_PATH/zsh/setup-utilities"
-
-# source shareable plugins
-source "$DOTFILES_PATH/bin/binrc"
+zsh "$DOTFILES_PATH/helpers/sync-dotfiles"
