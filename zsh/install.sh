@@ -43,8 +43,11 @@ fi
 
 cp "${DOTFILES_PATH}/zsh/themes/mmarchini.zsh-theme" "${ZSH_CUSTOM}/themes/"
 
-if ! diff "${ZSH_CUSTOM}/themes/mmarchini.zsh-theme.bkp" "${ZSH_CUSTOM}/themes/mmarchini.zsh-theme"; then
-  read -q "REPLY?zsh theme contains changes, [press key to continue]"
+if [ -f "${ZSH_CUSTOM}/themes/mmarchini.zsh-theme.bkp" ]; then
+  if ! diff "${ZSH_CUSTOM}/themes/mmarchini.zsh-theme.bkp" "${ZSH_CUSTOM}/themes/mmarchini.zsh-theme"; then
+    read -q "REPLY?zsh theme contains changes, [press key to continue]"
+  fi
+else
 fi
 
 #########

@@ -72,7 +72,7 @@ nmap <leader>. :Tags<CR>
 nmap <leader>bb :belowright :terminal npm install<CR>
 
 let g:gruvbox_contrast_dark='hard'
-colorscheme Atelier_DuneDark
+silent! colorscheme Atelier_DuneDark
 " colorscheme iceberg
 
 let g:NERDSpaceDelims = 1
