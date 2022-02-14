@@ -4,11 +4,13 @@ set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
 if which apt-get; then
-  sudo apt-get install xclip zsh
+  sudo apt-get install -y xclip zsh
 fi
 
 if [ ! -d "${HOME}/.oh-my-zsh" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+else
+  "$ZSH"/tools/upgrade.sh
 fi
 
 # TODO(mmarchini): find a better way to handle the first install

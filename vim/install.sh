@@ -20,4 +20,4 @@ if [ -f ~/.vimrc.bkp ]; then
   fi
 fi
 
-vim +PlugInstall
+vim +'PlugInstall --sync' +qa
