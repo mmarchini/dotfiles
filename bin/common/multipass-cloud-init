@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+export DOTFILES_PATH="${DOTFILES_PATH:-$(dirname $(dirname ${${(%):-%N}:A}))}"
+
+# export id_rsa_content="$(cat ${HOME}/.ssh/id_rsa | xargs -L1 -I{} printf "'%s'\n" "{}" | pr -to 6)"
+export id_rsa_content="$(cat ${HOME}/.ssh/id_rsa | pr -to 6)"
+export id_rsa_pub_content="$(cat ${HOME}/.ssh/id_rsa.pub)"
+
+envsubst < "${DOTFILES_PATH}/multipass/cloud-config.yaml"

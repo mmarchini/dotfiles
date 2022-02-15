@@ -1,7 +1,11 @@
 #!/bin/zsh
 
+export DOTFILES_PATH="${DOTFILES_PATH:-$(dirname $(dirname ${${(%):-%N}:A}))}"
+
+source "${DOTFILES_PATH}/helpers/path"
+
 # Common scripts to any operating system
-# export PATH=$DOTFILES_PATH/common:$PATH
+prependPathIfExists ${DOTFILES_PATH}/bin/common
 
 # Generic, non-shareable local bin folder
-export PATH=$HOME/bin:$PATH
+prependPathIfExists ${HOME}/bin
