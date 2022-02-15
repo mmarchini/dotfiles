@@ -1,11 +1,13 @@
 #!/bin/zsh
 
+# Ensure we don't have `set -e`, `set -e` bad
+set +e
+
 if [ ! -z "$ZSH_PROFILING" ]; then
   zmodload zsh/zprof
 fi
 
-# Ensure we don't have `set -e`, `set -e` bad
-set +e
+source "$DOTFILES_PATH/helpers/source"
 
 # TODO(mmarchini): deduplicate
 export DOTFILES_PATH="$(dirname $(dirname ${${(%):-%N}:A}))"
@@ -15,6 +17,8 @@ for file in "${DOTFILES_PATH}/zsh/source"/*; do
 done
 
 zsh "$DOTFILES_PATH/helpers/sync-dotfiles"
+
+sourceIfExists "${HOME}/.localzshrc"
 
 if [ ! -z "$ZSH_PROFILING" ]; then
   zprof
