@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Ensure we don't have `set -e`, `set -e` bad
+set +e
+
 # TODO(mmarchini): deduplicate
 export DOTFILES_PATH="$(dirname $(dirname ${${(%):-%N}:A}))"
 

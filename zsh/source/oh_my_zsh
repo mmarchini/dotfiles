@@ -18,6 +18,4 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-set +e
 source $ZSH/oh-my-zsh.sh
-set -e
