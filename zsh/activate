@@ -6,11 +6,12 @@ set +e
 if [ ! -z "$ZSH_PROFILING" ]; then
   zmodload zsh/zprof
 fi
-
-source "$DOTFILES_PATH/helpers/source"
-
+#
 # TODO(mmarchini): deduplicate
 export DOTFILES_PATH="$(dirname $(dirname ${${(%):-%N}:A}))"
+
+
+source "$DOTFILES_PATH/helpers/source"
 
 for file in "${DOTFILES_PATH}/zsh/source"/*; do
   source "$file"
