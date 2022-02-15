@@ -6,6 +6,10 @@ nodejs() { cd $HOME/workspace/nodejs/$1 }
 
 coredump () { ulimit -c unlimited; $@; ulimit -c 0 }
 
+zshprofiling () {
+  ZSH_PROFILING=1 /usr/bin/time zsh -i -c exit
+}
+
 # TODO(mmarchini) identify if we have pbcopy/pbpaste already
 if ! which pbcopy > /dev/null; then
   alias pbcopy='xclip -selection clipboard'

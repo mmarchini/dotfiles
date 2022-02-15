@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+if [ ! -z "$ZSH_PROFILING" ]; then
+  zmodload zsh/zprof
+fi
+
 # Ensure we don't have `set -e`, `set -e` bad
 set +e
 
@@ -11,3 +15,7 @@ for file in "${DOTFILES_PATH}/zsh/source"/*; do
 done
 
 zsh "$DOTFILES_PATH/helpers/sync-dotfiles"
+
+if [ ! -z "$ZSH_PROFILING" ]; then
+  zprof
+fi
