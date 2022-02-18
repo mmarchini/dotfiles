@@ -12,6 +12,7 @@ export DOTFILES_PATH="$(dirname $(dirname ${${(%):-%N}:A}))"
 
 
 source "$DOTFILES_PATH/helpers/source"
+source "$DOTFILES_PATH/bin/binrc"
 
 for file in "${DOTFILES_PATH}/zsh/source"/*; do
   source "$file"
