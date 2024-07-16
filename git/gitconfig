@@ -1,7 +1,6 @@
 [user]
 	name = Mary Marchini
 	email = oss@mmarchini.me
-	signingkey = 528D3D0E11D6F4A448E74AD0B6776C7958DCDBE6
 [alias]
 	st = status
 	cdiff = "!git diff --cached $1 | ydiff -s -w 0 --wrap"
@@ -18,8 +17,6 @@
 	exec = "!exec "
 [init]
         defaultBranch = main
-[commit]
-	gpgsign = true
 [color]
 	branch = auto
 	diff = auto
