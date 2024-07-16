@@ -1,0 +1,7 @@
+import = [
+  "./.dotfiles/alacritty/themes/cyber_punk_neon.toml",
+]
+live_config_reload = true
+
+[window]
+dimensions = { columns = 90, lines = 30 }
