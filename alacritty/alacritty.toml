@@ -1,7 +1,8 @@
 import = [
-  "./.dotfiles/alacritty/themes/cyber_punk_neon.toml",
+  "/home/mmarchini/.dotfiles/alacritty/themes/cyber_punk_neon.toml",
 ]
 live_config_reload = true
+shell="zsh"
 
 [window]
 dimensions = { columns = 90, lines = 30 }
