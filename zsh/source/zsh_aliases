@@ -11,10 +11,10 @@ zshprofiling () {
 }
 
 # TODO(mmarchini) identify if we have pbcopy/pbpaste already
-if ! which pbcopy > /dev/null; then
+if ! which pbcopy &> /dev/null; then
   alias pbcopy='xclip -selection clipboard'
 fi
-if ! which pbpaste > /dev/null; then
+if ! which pbpaste &> /dev/null; then
   alias pbpaste='xclip -selection clipboard'
 fi
 alias duh='du -sh .[!.]* *'
