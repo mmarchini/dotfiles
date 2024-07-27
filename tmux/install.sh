@@ -3,10 +3,12 @@
 set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
-if which apt-get > /dev/null; then
-  sudo apt-get install -y tmux
-else
-  brew install tmux
+if ! which  tmux > /dev/null; then
+  if which apt-get > /dev/null; then
+    sudo apt-get install -y tmux
+  else
+    brew install tmux
+  fi
 fi
 
 if [ ! -d "$HOME/.tmux/plugins/" ]; then

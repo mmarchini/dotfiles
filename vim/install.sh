@@ -3,10 +3,12 @@
 set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
-if which apt-get > /dev/null; then
-  sudo apt-get install -y vim curl
-else
-  brew install vim curl
+if ! which vim > /dev/null; then
+  if which apt-get > /dev/null; then
+    sudo apt-get install -y vim curl
+  else
+    brew install vim curl
+  fi
 fi
 
 if [ -f ~/.vimrc ]; then
