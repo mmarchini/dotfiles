@@ -9,7 +9,8 @@ sudo dnf install sway fuzzel wl-clipboard wlsunset waybar grim slurp xfce-polkit
 # Configure sway
 if [ ! -f ~/.config/sway/config ]; then
   mkdir -p ~/.config/sway/
-  ln -s $DOTFILES_PATH/sway/swaywm/config ~/.config/mako/config
+  echo 'include "'"$DOTFILES_PATH"'/sway/swaywm/config"' > ~/.config/sway/config
+  # ln -s $DOTFILES_PATH/sway/swaywm/config ~/.config/sway/config
 fi
 
 # Sway systemd session
