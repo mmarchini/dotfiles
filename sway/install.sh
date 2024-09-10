@@ -41,6 +41,10 @@ if [ ! -f ~/.config/swaylock/config ]; then
 fi
 ln -sf $DOTFILES_PATH/sway/swaylock/lock.jpg ~/.config/swaylock/lock.jpg
 
+# Force Wayland for electron apps
+mkdir -p ~/.config/environment.d
+ln -sf $DOTFILES_PATH/sway/environment.d/30-electron-wayland.conf ~/.config/environment.d/30-electron-wayland.conf
+
 # Waybar
 if [ ! -f ~/.config/waybar/config.jsonc ]; then
   mkdir -p ~/.config/waybar/
@@ -51,3 +55,4 @@ if [ ! -f ~/.config/waybar/style.css ]; then
   echo '@import "'$DOTFILES_PATH'/sway/waybar/style.css";' > ~/.config/waybar/style.css
 fi
 # TODO: waybar with systemd?
+
