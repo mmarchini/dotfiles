@@ -1,0 +1,6 @@
+@import "../mocha.css";
+
+#temperature.critical {
+    background-color: @red;
+}
+

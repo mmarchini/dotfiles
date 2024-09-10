@@ -1,0 +1,9 @@
+[Unit]
+Description=Wayland Sunset (Redshift)
+
+[Service]
+Type=simple
+ExecStart=wlsunset -l 37.7 -L -122.4 -t 3000 -g 0.8
+
+[Install]
+WantedBy=sway-session.target

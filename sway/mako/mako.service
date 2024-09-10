@@ -1,0 +1,9 @@
+[Unit]
+Description=mako notifications
+
+[Service]
+Type=simple
+ExecStart=mako
+
+[Install]
+WantedBy=sway-session.target

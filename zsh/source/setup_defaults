@@ -2,3 +2,4 @@
 
 export EDITOR='vim'
 export GPG_TTY=$(tty)
+export MANPAGER="vim +MANPAGER -M -"

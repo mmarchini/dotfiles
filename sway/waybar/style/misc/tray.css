@@ -1,0 +1,20 @@
+@import "../mocha.css";
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: @red;
+}
+
+#tray menu {
+    background-color: @surface0;
+
+}
+
+#tray menu :hover {
+    background-color: @red;
+
+}

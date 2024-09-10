@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+export FOLDER="$(dirname ${${(%):-%N}:A})"
+
+trap "killall waybar" EXIT
+
+while true; do
+    waybar &
+    inotifywait -e create,modify "$FOLDER/config.jsonc" "$FOLDER/style.css"
+    killall waybar
+done

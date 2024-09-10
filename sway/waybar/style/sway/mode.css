@@ -1,0 +1,9 @@
+@import "../mocha.css";
+
+#mode {
+    color: @teal;
+    font-weight: bold;
+    background-color: @surface1;
+    box-shadow: inset 0 -3px @teal;
+}
+

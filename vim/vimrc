@@ -42,9 +42,12 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'cocopon/iceberg.vim'
   Plug 'morhetz/gruvbox'
-  Plug 'flazz/vim-colorschemes'
+  Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+  " Plug 'flazz/vim-colorschemes'
   Plug 'felixhummel/setcolors.vim'
   " Plug 'luochen1990/rainbow'
+
+  Plug 'jasonccox/vim-wayland-clipboard'
 
   Plug 'vim-scripts/ctags.vim'
 
@@ -72,7 +75,7 @@ nmap <leader>. :Tags<CR>
 nmap <leader>bb :belowright :terminal npm install<CR>
 
 let g:gruvbox_contrast_dark='hard'
-silent! colorscheme Atelier_DuneDark
+silent! colorscheme catppuccin_mocha
 " colorscheme iceberg
 
 let g:NERDSpaceDelims = 1
@@ -98,7 +101,7 @@ let g:ale_linters = {
 \}
 
 " BEGIN Lightline ALE integration
-let g:lightline = {}
+let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 
 let g:lightline.component = {
       \   'tagbar': '%{tagbar#currenttag("%s", "")}',

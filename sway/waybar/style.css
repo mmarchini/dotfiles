@@ -1,0 +1,12 @@
+@import "./style/global.css";
+
+/* sway modules */
+@import "./style/sway/mode.css";
+@import "./style/sway/workspaces.css";
+
+@import "./style/misc/battery.css";
+@import "./style/misc/idle_inhibitor.css";
+@import "./style/misc/power-profiles.css";
+@import "./style/misc/temperature.css";
+@import "./style/misc/tray.css";
+@import "./style/misc/wireplumber.css";

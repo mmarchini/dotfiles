@@ -20,3 +20,4 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
 fi
 
 echo "source-file ${DOTFILES_PATH}/tmux/tmux.conf" > "$HOME/.tmux.conf"
+~/.tmux/plugins/tpm/bin/install_plugins

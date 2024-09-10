@@ -1,0 +1,3 @@
+#!/bin/bash
+
+printf "Power Off\nReboot\nSuspend" | fuzzel --dmenu

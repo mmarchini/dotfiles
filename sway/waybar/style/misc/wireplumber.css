@@ -1,0 +1,12 @@
+@import "../mocha.css";
+
+#wireplumber {
+    color: @text;
+    background-color: transparent;
+}
+
+#wireplumber.muted {
+    color: @red;
+    background-color: transparent;
+}
+

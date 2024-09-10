@@ -1,0 +1,5 @@
+@import "../mocha.css";
+
+#idle_inhibitor.activated {
+    color: @lavender;
+}

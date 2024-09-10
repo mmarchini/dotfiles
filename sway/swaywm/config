@@ -1,5 +1,17 @@
 # vim:ft=swayconfig:
 
+include './catppuccin-mocha'
+
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $lavender
+# client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+# client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.focused_inactive  $overlay0 $base $text  $rosewater #ffffff00
+client.unfocused         $overlay0 $base $text  $rosewater #ffffff00
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
 ### Variables
 # Logo key
 set $mod Mod4
@@ -10,17 +22,20 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | bemenu | xargs swaymsg exec --
+set $menu fuzzel
+# set $menu dmenu_path | bemenu | xargs swaymsg exec --
+
+set $websearch fuzzel-web-search
 
 ### Idle configuration
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+# exec swayidle -w \
+#          timeout 300 'swaylock -f' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f'
 
 ### Key bindings
 #
@@ -35,6 +50,9 @@ exec swayidle -w \
     # Start your launcher
     bindsym $mod+d exec $menu
 
+    # Start your launcher
+    bindsym $mod+Shift+s exec $websearch
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -47,6 +65,8 @@ exec swayidle -w \
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    bindsym $mod+Shift+L exec swaylock -f
 #
 # Moving around:
 #
@@ -145,21 +165,84 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
+# Generic Special Keys
+#
+# {
+  # Audio
+  bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+  bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+  bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+  bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+  # Screen
+  bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+  bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+
+  # Media
+  bindsym XF86AudioPlay exec playerctl play-pause
+  bindsym XF86AudioNext exec playerctl next
+  bindsym XF86AudioPrev exec playerctl previous
+
+  # Touchpad
+  bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
+# }
+
+#
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
+    swaybar_command waybar
+    # position top
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+    # colors {
+    #     statusline #ffffff
+    #     background #323232
+    #     inactive_workspace #32323200 #32323200 #5c5c5c
+    # }
+}
+
+# GTK3 settings
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'catppuccin-mocha-lavender-standard+default'
+}
+
+# Application-specific behaviors
+
+for_window [app_id="xfce-polkit"] floating enable
+
+# systemd stuff
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
+
+## Hey
+
+# border none
+default_border pixel 1
+smart_borders on
+# gaps horizontal 50
+# gaps vertical 50
+# gaps bottom 10
+gaps outer -7
+gaps inner 7
+# font monospace 0
+
+## Input configs
+input "type:touchpad" {
+  natural_scroll enabled
+  tap enabled
+  click_method clickfinger
+}
+
+input type:keyboard {
+    xkb_layout us
+    xkb_options caps:super
 }
 
 include /etc/sway/config.d/*
