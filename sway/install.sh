@@ -3,7 +3,8 @@
 set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
-# TODO: install packages
+# TODO: use a metapackage  to manage dependencies
+sudo dnf install sway fuzzel wl-clipboard wlsunset waybar grim slurp xfce-polkit brightnessctl mako
 
 # Configure sway
 if [ ! -f ~/.config/sway/config ]; then
