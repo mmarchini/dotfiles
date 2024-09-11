@@ -211,6 +211,7 @@ set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
     gsettings set $gnome-schema gtk-theme 'catppuccin-mocha-lavender-standard+default'
+    gsettings set $gnome-schema color-scheme 'prefer-dark'
 }
 
 # Application-specific behaviors
