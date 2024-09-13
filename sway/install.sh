@@ -4,7 +4,17 @@ set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
 # TODO: use a metapackage  to manage dependencies
-sudo dnf install sway fuzzel wl-clipboard wlsunset waybar grim slurp xfce-polkit brightnessctl mako
+sudo dnf install sway fuzzel wl-clipboard wlsunset waybar grim slurp polkit-gnome brightnessctl mako
+
+# GTK Catpuccin Theme
+if [ ! -d ~/.local/share/themes/catppuccin-mocha-lavender-standard+default ]; then
+  mkdir -p ~/.local/share/themes
+  pushd ~/.local/share/themes
+  wget https://github.com/catppuccin/gtk/releases/download/v1.0.3/catppuccin-mocha-lavender-standard+default.zip
+  unzip catppuccin-mocha-lavender-standard+default.zip
+  popd
+fi
+
 
 # Configure sway
 if [ ! -f ~/.config/sway/config ]; then
@@ -31,8 +41,8 @@ systemctl --user enable --now $DOTFILES_PATH/sway/mako/mako.service
 # wlsunset
 systemctl --user enable --now $DOTFILES_PATH/sway/wlsunset/wlsunset.service
 
-# xfce-polkit
-systemctl --user enable --now $DOTFILES_PATH/sway/xfce-polkit/xfce-polkit.service
+# polkit-gnome
+systemctl --user enable --now $DOTFILES_PATH/sway/polkit-gnome/polkit-gnome.service
 
 # swayidle + swaylock
 systemctl --user enable --now $DOTFILES_PATH/sway/swayidle/swayidle.service

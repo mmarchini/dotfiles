@@ -1,9 +1,0 @@
-[Unit]
-Description=XFCE  Polkit
-
-[Service]
-Type=simple
-ExecStart=/usr/libexec/xfce-polkit
-
-[Install]
-WantedBy=sway-session.target

@@ -216,7 +216,8 @@ exec_always {
 
 # Application-specific behaviors
 
-for_window [app_id="xfce-polkit"] floating enable
+for_window [app_id="polkit-gnome-authentication-agent-1"] floating enable
+for_window [app_id="keymapp"] floating enable, opacity 0.85, sticky enable, move position 73ppt 1ppt
 
 # systemd stuff
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
@@ -233,6 +234,11 @@ smart_borders on
 gaps outer -7
 gaps inner 7
 # font monospace 0
+
+## Output configs
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
 
 ## Input configs
 input "type:touchpad" {

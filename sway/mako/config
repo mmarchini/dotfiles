@@ -1,3 +1,65 @@
+# [ Global Config ]
+# max no of notification in buffer
+max-history=15
+
+default-timeout=10000
+
+# arrange notification ( +/- time or +/- priority )
+sort=+time
+
+# Arrange mako at the specified layer, relative to normal windows.(value: background, bottom, top, overlay )
+layer=overlay
+
+# Show notifications at the specified position on the output.
+anchor=top-center
+
+# [ BINDING OPTIONS ]
+# Supported values: none, dismiss, dismiss-all,
+# dismiss-group, invoke-default-action & exec <command>
+
+on-button-left=invoke-default-action
+on-button-middle=dismiss-group
+on-button-right=dismiss
+on-touch=invoke-default-action
+
+# [ STYLE OPTIONS ]
+
+# which installed font for notification( any font installed )
+font= monospace 16
+
+# Show icons in notifications.( value: -1 | 1 )
+icons=1
+
+group-by=app-name
+
+#  Applications may request an action( value 0|1 )
+actions=1
+
+# mako will save notifications that have reached their timeout into the history buffer in‐
+# stead of immediately deleting them.
+history=1
+
+# Set maximum number of visible notifications
+max-visible=5
+
+# Set width of notification popup.( value in px )
+width=500
+
+# maximum height of notification( value in px )
+height=150
+
+# margin of notification which is margin for the list of notification block( value in px ).
+outer-margin=3
+# Margin of each individual notification
+margin=2
+
+# Set padding on each side to the size specified by directional( value in px )
+padding=15,20
+
+#Set popup border size to px pixels.(value in px )
+border-size=1
+
+
 # Colors
 
 background-color=#1e1e2e
