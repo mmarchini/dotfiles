@@ -6,32 +6,55 @@
   font-family: "Hack Nerd Font Mono";
 }
 
+window {
+  padding: 5px;
+}
+
 window#waybar {
-  margin-top: 50px;
+  /* margin-top: 150px; */
   /* you can also GTK3 CSS functions! */
+  background-color: transparent;
+  /* box-shadow: inset 0 -3px @surface0; */
+}
+
+window > box {
+  margin: 5px 10px 0px;
+  background: transparent;
+}
+
+.modules-left .module {
+  padding: 0px 20px;
   background-color: @base;
-  box-shadow: inset 0 -3px @surface0;
+  border-radius: 25px;
 }
 
-button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
-    border: none;
-    border-radius: 0;
+.modules-left .module {
+  margin-right: 20px;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px @red;
+.modules-left widget:last-child .module {
+  margin-right: 0px;
 }
 
-#wireplumber {
-  background-color: @red;
+.modules-center {
+  padding: 0px 30px;
+  background: @base;
+  border-radius: 25px;
+  transition-property: all;
+  transition-duration: 1s;
 }
 
-.modules-right .module, .modules-left .module {
-    padding: 0 5px;
-    background-color: transparent;
+.modules-right {
+  padding: 0px 20px;
+  background: @base;
+  border-radius: 25px;
+}
+
+.module {
+  padding: 0px 5px;
+}
+
+#image {
+  background: @red;
+  /* display: block; */
 }

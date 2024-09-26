@@ -2,17 +2,18 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    "height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
+        "clock",
+        "mpris",
+    ],
+    "modules-center": [
         "sway/scratchpad",
         "sway/workspaces",
         "sway/mode"
-    ],
-    "modules-center": [
-        "custom/media"
     ],
     "modules-right": [
         "tray",
@@ -20,15 +21,22 @@
         "pulseaudio",
         "network",
         "power-profiles-daemon",
-        "cpu",
-        "memory",
-        "temperature",
         "backlight",
         "sway/language",
+        "group/hardware",
         "battery",
-        "clock",
         "custom/power"
     ],
+    "group/hardware": {
+      "modules": [
+        "temperature",
+        "cpu",
+        "memory",
+      ],
+      "orientation": "inherit",
+      "drawer": {
+      }
+    },
     // Modules configuration
     "sway/workspaces": {
         // "disable-scroll": false,
@@ -66,6 +74,7 @@
     },
     "clock": {
         // "timezone": "America/New_York",
+        "format": "{:%Y-%m-%d  %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -143,6 +152,29 @@
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "󰌙",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "mpris": {
+            "format": "{status_icon} {dynamic}",
+            // "player-icons": {
+            //         "default": "▶",
+            //         "mpv": "🎵"
+            // },
+            "status-icons": {
+                    "playing": "▶",
+                    "paused": "⏸",
+                    "stopped": "X"
+            },
+            "title-len": 40,
+            "artist-len": 30,
+            "dynamic-order": [
+              "title",
+              "artist",
+            ],
+            "dynamic-importance-order": [
+              "title",
+              "artist",
+            ],
+            // "ignored-players": ["firefox"]
     },
     "custom/power": {
         "format" : "⏻ ",
