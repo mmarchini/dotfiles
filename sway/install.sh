@@ -4,7 +4,7 @@ set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
 # TODO: use a metapackage  to manage dependencies
-sudo dnf install sway fuzzel wl-clipboard wlsunset waybar grim slurp polkit-gnome brightnessctl mako
+sudo dnf install sway rofi-wayland  wl-clipboard wlsunset waybar grim slurp polkit-gnome brightnessctl mako
 
 # GTK Catpuccin Theme
 if [ ! -d ~/.local/share/themes/catppuccin-mocha-lavender-standard+default ]; then
@@ -14,7 +14,6 @@ if [ ! -d ~/.local/share/themes/catppuccin-mocha-lavender-standard+default ]; th
   unzip catppuccin-mocha-lavender-standard+default.zip
   popd
 fi
-
 
 # Configure sway
 if [ ! -f ~/.config/sway/config ]; then
@@ -26,10 +25,11 @@ fi
 # Sway systemd session
 systemctl --user link $DOTFILES_PATH/sway/sway-session.target
 
-# Fuzzel
-mkdir -p ~/.config/fuzzel
-echo 'include="'$DOTFILES_PATH'/sway/fuzzel/fuzzel.ini"' > ~/.config/fuzzel/fuzzel.ini
-echo 'include="'$DOTFILES_PATH'/sway/fuzzel/themes/mocha/red.ini"' >> ~/.config/fuzzel/fuzzel.ini
+# Rofi
+mkdir -p $HOME/.config/rofi
+mkdir -p $HOME/.local/share/rofi
+ln -s $DOTFILES_PATH/sway/rofi/themes $HOME/.local/share/rofi/
+ln -s $DOTFILES_PATH/sway/rofi/config.rasi $HOME/.config/rofi/
 
 # Mako
 if [ ! -f ~/.config/mako/config ]; then
