@@ -1,0 +1,9 @@
+[Unit]
+Description=Waybar
+
+[Service]
+Type=simple
+ExecStart=waybar
+
+[Install]
+WantedBy=graphical-session.target

@@ -28,8 +28,12 @@ systemctl --user link $DOTFILES_PATH/sway/sway-session.target
 # Rofi
 mkdir -p $HOME/.config/rofi
 mkdir -p $HOME/.local/share/rofi
-ln -s $DOTFILES_PATH/sway/rofi/themes $HOME/.local/share/rofi/
-ln -s $DOTFILES_PATH/sway/rofi/config.rasi $HOME/.config/rofi/
+if [ ! -d $HOME/.local/share/rofi/themes ]; then
+  ln -s $DOTFILES_PATH/sway/rofi/themes $HOME/.local/share/rofi/
+fi
+if [ ! -f $HOME/.config/rofi/config.rasi ]; then
+  ln -s $DOTFILES_PATH/sway/rofi/config.rasi $HOME/.config/rofi/
+fi
 
 # Mako
 if [ ! -f ~/.config/mako/config ]; then
@@ -65,5 +69,4 @@ fi
 if [ ! -f ~/.config/waybar/style.css ]; then
   echo '@import "'$DOTFILES_PATH'/sway/waybar/style.css";' > ~/.config/waybar/style.css
 fi
-# TODO: waybar with systemd?
-
+systemctl --user enable --now $DOTFILES_PATH/sway/waybar/waybar.service
