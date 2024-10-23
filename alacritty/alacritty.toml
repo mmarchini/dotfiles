@@ -9,4 +9,3 @@ normal = { family = "Hack Nerd Font Mono", style = "Reguler" }
 
 [window]
 dimensions = { columns = 90, lines = 30 }
-opacity = 0.9
