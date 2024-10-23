@@ -9,4 +9,4 @@ ExecStart=swayidle -w \
          before-sleep 'swaylock -f'
 
 [Install]
-WantedBy=sway-session.target
+WantedBy=graphical-session.target
