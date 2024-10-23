@@ -1,12 +1,148 @@
-@import "./style/global.css";
+@import "./style/mocha.css";
 
-/* sway modules */
-@import "./style/sway/mode.css";
-@import "./style/sway/workspaces.css";
+* {
+  /* reference the color by using @color-name */
+  color: @text;
+  font-family: "Hack Nerd Font Mono";
+}
 
-@import "./style/misc/battery.css";
-@import "./style/misc/idle_inhibitor.css";
-@import "./style/misc/power-profiles.css";
-@import "./style/misc/temperature.css";
-@import "./style/misc/tray.css";
-@import "./style/misc/wireplumber.css";
+window {
+  padding: 5px;
+}
+
+window#waybar {
+  /* you can also GTK3 CSS functions! */
+  background-color: alpha(@base, 0.65);
+  padding: 0px;
+}
+
+window > box {
+  margin: 5px 10px 5px;
+  background: transparent;
+}
+
+.modules-left .module {
+  padding: 0px 15px;
+}
+
+.modules-left .module {
+  margin-right: 20px;
+}
+
+.modules-left widget:last-child .module {
+  margin-right: 0px;
+}
+
+.modules-center {
+  padding: 0px 15px;
+  background: @base;
+  transition-property: all;
+  transition-duration: 1s;
+}
+
+.modules-right {
+  padding: 0px 15px;
+  background: @base;
+}
+
+.module {
+  padding: 0px 5px;
+}
+
+#mode {
+    color: @teal;
+    font-weight: bold;
+    box-shadow: inset 0 -3px @teal;
+}
+
+#workspaces button {
+    padding: 0 5px;
+
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    /* border: none; */
+    border-radius: 0;
+}
+
+#workspaces button:hover {
+    box-shadow: inset 0 -3px @pink;
+}
+
+#workspaces button.focused {
+    font-weight: bold;
+    box-shadow: inset 0 -3px @red;
+}
+
+#workspaces button.urgent {
+    box-shadow: inset 0 -3px @red;
+}
+
+
+#battery.charging, #battery.plugged {
+    color: @teal;
+}
+
+@keyframes blink {
+    to {
+        box-shadow: inset 0 -3px #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: @overlay2;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+
+#idle_inhibitor.activated {
+    color: @lavender;
+}
+
+
+#power-profiles-daemon {
+    padding-right: 15px;
+}
+
+#power-profiles-daemon.performance {
+    color: @red;
+}
+
+#power-profiles-daemon.balanced {
+    color: @text;
+}
+
+#power-profiles-daemon.power-saver {
+    color: @teal;
+}
+
+
+#temperature.critical {
+    box-shadow: inset 0 -3px @red;
+}
+
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: @red;
+}
+
+
+#pulseaudio {
+    color: @text;
+}
+
+#pulseaudio.muted {
+    color: @red;
+}
+
