@@ -1,11 +1,15 @@
-import = [
-  "/home/mmarchini/.dotfiles/alacritty/themes/catppuccin-mocha.toml",
-]
-live_config_reload = true
-shell="zsh"
 
 [font]
 normal = { family = "Hack Nerd Font Mono", style = "Reguler" }
 
 [window]
 dimensions = { columns = 90, lines = 30 }
+
+[general]
+live_config_reload = true
+import = [
+  "/home/mmarchini/.dotfiles/alacritty/themes/catppuccin-mocha.toml",
+]
+
+[terminal]
+shell="zsh"
