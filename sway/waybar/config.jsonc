@@ -5,6 +5,7 @@
     "height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
+    "reload_style_on_change": true,
     // Choose the order of the modules
     "modules-left": [
         "clock",
@@ -13,7 +14,9 @@
     "modules-center": [
         "sway/scratchpad",
         "sway/workspaces",
-        "sway/mode"
+        "sway/mode",
+        "river/tags",
+        "river/mode",
     ],
     "modules-right": [
         "tray",
@@ -179,13 +182,6 @@
     "custom/power": {
         "format" : "⏻ ",
 		"tooltip": false,
-		"menu": "on-click",
-		// "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+		"on-click": "$HOME/.dotfiles/bin/common/rofi-powermenu",
     }
 }

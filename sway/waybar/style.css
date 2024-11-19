@@ -1,6 +1,6 @@
 @import "./style/mocha.css";
 
-* {
+window {
   /* reference the color by using @color-name */
   color: @text;
   font-family: "Hack Nerd Font Mono";
@@ -35,14 +35,12 @@ window > box {
 
 .modules-center {
   padding: 0px 15px;
-  background: @base;
   transition-property: all;
   transition-duration: 1s;
 }
 
 .modules-right {
   padding: 0px 15px;
-  background: @base;
 }
 
 .module {
@@ -55,7 +53,7 @@ window > box {
     box-shadow: inset 0 -3px @teal;
 }
 
-#workspaces button {
+#workspaces,#tags button {
     padding: 0 5px;
 
     /* Use box-shadow instead of border so the text isn't offset */
@@ -65,16 +63,24 @@ window > box {
     border-radius: 0;
 }
 
-#workspaces button:hover {
+#workspaces,#tags button:hover {
     box-shadow: inset 0 -3px @pink;
 }
 
-#workspaces button.focused {
+#tags button {
+  color: @surface1;
+}
+
+#tags button.occupied {
+  color: @text;
+}
+
+#workspaces,#tags button.focused {
     font-weight: bold;
     box-shadow: inset 0 -3px @red;
 }
 
-#workspaces button.urgent {
+#workspaces,#tags button.urgent {
     box-shadow: inset 0 -3px @red;
 }
 

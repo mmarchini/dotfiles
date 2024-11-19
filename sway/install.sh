@@ -4,7 +4,7 @@ set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
 # TODO: use a metapackage  to manage dependencies
-sudo dnf install sway rofi-wayland  wl-clipboard wlsunset waybar grim slurp polkit-gnome brightnessctl mako
+sudo dnf install sway rofi-wayland  wl-clipboard wlsunset waybar grim slurp polkit-gnome brightnessctl mako kanshi
 
 # GTK Catpuccin Theme
 if [ ! -d ~/.local/share/themes/catppuccin-mocha-lavender-standard+default ]; then
@@ -23,7 +23,6 @@ if [ ! -f ~/.config/sway/config ]; then
 fi
 
 # Sway systemd session
-systemctl --user link $DOTFILES_PATH/sway/sway-session.target
 
 # Rofi
 mkdir -p $HOME/.config/rofi
@@ -40,16 +39,8 @@ if [ ! -f ~/.config/mako/config ]; then
   mkdir -p ~/.config/mako/
   ln -s $DOTFILES_PATH/sway/mako/config ~/.config/mako/config
 fi
-systemctl --user enable --now $DOTFILES_PATH/sway/mako/mako.service
-
-# wlsunset
-systemctl --user enable --now $DOTFILES_PATH/sway/wlsunset/wlsunset.service
-
-# polkit-gnome
-systemctl --user enable --now $DOTFILES_PATH/sway/polkit-gnome/polkit-gnome.service
 
 # swayidle + swaylock
-systemctl --user enable --now $DOTFILES_PATH/sway/swayidle/swayidle.service
 if [ ! -f ~/.config/swaylock/config ]; then
   mkdir -p ~/.config/swaylock/
   ln -s $DOTFILES_PATH/sway/swaylock/config ~/.config/swaylock/config
@@ -69,4 +60,5 @@ fi
 if [ ! -f ~/.config/waybar/style.css ]; then
   echo '@import "'$DOTFILES_PATH'/sway/waybar/style.css";' > ~/.config/waybar/style.css
 fi
-systemctl --user enable --now $DOTFILES_PATH/sway/waybar/waybar.service
+
+$DOTFILES_PATH/sway/install-systemd.sh

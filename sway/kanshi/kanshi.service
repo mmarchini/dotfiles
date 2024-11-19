@@ -1,0 +1,9 @@
+[Unit]
+Description=kanshi output management
+
+[Service]
+Type=simple
+ExecStart=kanshi
+
+[Install]
+WantedBy=graphical-session.target
