@@ -243,6 +243,7 @@ exec_always {
 
 for_window [app_id="polkit-gnome-authentication-agent-1"] floating enable
 for_window [app_id="keymapp"] floating enable, opacity 0.85, sticky enable, move position 73ppt 1ppt
+for_window [app_id="Slack"] move container to workspace 3
 
 # systemd stuff
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
