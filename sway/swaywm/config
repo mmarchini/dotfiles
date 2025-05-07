@@ -75,7 +75,7 @@ set $websearch fuzzel-web-search
 
     # Exit sway (logs you out of your Wayland session)
     # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-    bindsym $mod+Shift+e exec rofi-powermenu
+    bindsym $mod+Shift+e exec ~/.dotfiles/bin/common/rofi-powermenu
 
     # bindsym $mod+Shift+L exec swaylock -f
 #
@@ -100,6 +100,10 @@ set $websearch fuzzel-web-search
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+Right move right
     bindsym $mod+Shift+$right move right
+
+    # More move focus around
+    bindsym $mod+Tab focus next
+    bindsym $mod+Shift+Tab focus prev
 #
 # Workspaces:
 #
@@ -241,11 +245,19 @@ exec_always {
 
 # Application-specific behaviors
 
+# Floating
 for_window [app_id="polkit-gnome-authentication-agent-1"] floating enable
+
 for_window [app_id="keymapp"] floating enable, opacity 0.85, sticky enable, move position 73ppt 1ppt
+
+# Browser
 for_window [app_id="google-chrome"] move container to workspace 2
-for_window [app_id="firefox"] move container to workspace 2
+for_window [app_id="org.mozilla.firefox"] move container to workspace 2
+
+# Chats
 for_window [app_id="Slack"] move container to workspace 3
+for_window [class="Signal"] move container to workspace 3
+
 
 # systemd stuff
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
