@@ -69,3 +69,6 @@ progress-color=over #313244
 
 [urgency=high]
 border-color=#fab387
+
+[mode=do-not-disturb]
+invisible=1
