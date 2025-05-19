@@ -13,6 +13,7 @@ plugins=(
   node
   npm
   nvm
+  rust
   virtualenv
   zsh-autosuggestions
   zsh-syntax-highlighting
