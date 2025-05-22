@@ -194,6 +194,17 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+set $leaveSwap [con_mark=swap] unmark swap, mode "default"
+mode "swap" {
+    # bindsym t swap container with mark swap, $leaveSwap
+    bindsym t swap container with mark swap ; [con_mark=swap] focus ; [con_mark=swap] unmark swap ; mode "default"
+    bindsym BTN_LEFT swap container with mark swap, $leaveSwap
+
+    # Return to default mode
+    bindsym Escape $leaveSwap
+}
+bindsym $mod+t mark --add swap, mode "swap"
+
 #
 # Generic Special Keys
 #
