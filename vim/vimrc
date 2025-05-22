@@ -4,6 +4,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob '!.git'"
+
 call plug#begin('~/.vim/plugged')
   Plug 'https://github.com/junegunn/vim-github-dashboard.git'
   " On-demand loading
@@ -70,8 +72,10 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 map <C-n> :NERDTreeToggle<CR>
-nmap <C-p> :FZF<CR>
+nmap <C-p> :Files<CR>
+" nmap <C-p> :Rg<CR>
 nmap <C-k> :TagbarToggle<CR>
+nmap <leader>f :Rg<CR>
 nmap <leader>. :Tags<CR>
 
 nmap <leader>bb :belowright :terminal npm install<CR>
@@ -140,7 +144,7 @@ let g:lightline.active = {
 autocmd BufNewFile ~/vimwiki/diary/[0-9]*.wiki :silent %!echo "= `date -d '%:t:r' +'\%Y-\%d-\%m'` =\n\n== Things Done ==\n\n"
 " END
 
-let g:coc_global_extensions = [ 'coc-tsserver' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-rust-analyzer' ]
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
