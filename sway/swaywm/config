@@ -2,14 +2,10 @@
 
 include './catppuccin-mocha'
 
-# target                 title     bg    text   indicator  border
-client.focused           $lavender $base $text  $rosewater $lavender
-# client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
-# client.unfocused         $overlay0 $base $text  $rosewater $overlay0
-client.focused_inactive  $overlay0 $base $text  $rosewater #ffffff00
-client.unfocused         $overlay0 $base $text  $rosewater #ffffff00
-client.urgent            $peach    $base $peach $overlay0  $peach
-client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+# target                 title     bg        text   indicator  border
+client.unfocused         $overlay2 $surface1 $text  #ffffff00  #ffffff00
+client.urgent            $red      $surface1 $red   $red       $red
+client.placeholder       $overlay0 $surface1 $text  $overlay0  $overlay0
 client.background        $base
 
 ### Variables
@@ -194,11 +190,11 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $leaveSwap [con_mark=swap] unmark swap, mode "default"
+set $leaveSwap [con_mark=swap] unmark swap ; mode "default"
 mode "swap" {
     # bindsym t swap container with mark swap, $leaveSwap
-    bindsym t swap container with mark swap ; [con_mark=swap] focus ; [con_mark=swap] unmark swap ; mode "default"
-    bindsym BTN_LEFT swap container with mark swap, $leaveSwap
+    bindsym t swap container with mark swap ; $leaveSwap
+    bindsym BTN_LEFT swap container with mark swap ; $leaveSwap
 
     # Return to default mode
     bindsym Escape $leaveSwap
@@ -232,19 +228,20 @@ bindsym $mod+t mark --add swap, mode "swap"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    # position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-    # colors {
-    #     statusline #ffffff
-    #     background #323232
-    #     inactive_workspace #32323200 #32323200 #5c5c5c
-    # }
-}
+# bar {
+#     font pango:Hack Nerd Font Mono, Hack Nerd Font 12
+#     position top
+#     status_command i3status-rs ~/.dotfiles/sway/i3status-rs.toml
+#     colors {
+#         separator #666666
+#         background #222222
+#         statusline #dddddd
+#         focused_workspace #0088CC #0088CC #ffffff
+#         active_workspace #333333 #333333 #ffffff
+#         inactive_workspace #333333 #333333 #888888
+#         urgent_workspace #2f343a #900000 #ffffff
+#     }
+# }
 
 # GTK3 settings
 set $gnome-schema org.gnome.desktop.interface
@@ -255,6 +252,8 @@ exec_always {
 }
 
 # Application-specific behaviors
+
+focus_on_window_activation focus
 
 # Floating
 for_window [app_id="polkit-gnome-authentication-agent-1"] floating enable
