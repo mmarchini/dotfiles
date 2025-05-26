@@ -157,6 +157,16 @@ nmap <silent><nowait> gy <Plug>(coc-type-definition)
 nmap <silent><nowait> gi <Plug>(coc-implementation)
 nmap <silent><nowait> gr <Plug>(coc-references)
 
+
+" Show hover when provider exists, fallback to vim's builtin behavior.
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('definitionHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
 " Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
