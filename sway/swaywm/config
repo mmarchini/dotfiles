@@ -4,6 +4,8 @@ include './catppuccin-mocha'
 
 # target                 title     bg        text   indicator  border
 client.unfocused         $overlay2 $surface1 $text  #ffffff00  #ffffff00
+client.focused           $lavender $base     $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base     $text  #ffffff00  #ffffff00
 client.urgent            $red      $surface1 $red   $red       $red
 client.placeholder       $overlay0 $surface1 $text  $overlay0  $overlay0
 client.background        $base
@@ -281,8 +283,8 @@ smart_borders on
 # gaps horizontal 50
 # gaps vertical 50
 # gaps bottom 10
-gaps outer -7
-gaps inner 7
+# gaps outer -7
+# gaps inner 7
 # font monospace 0
 
 ## Output configs
