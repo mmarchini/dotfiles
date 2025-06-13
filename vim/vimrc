@@ -73,6 +73,7 @@ call plug#end()
 
 map <C-n> :NERDTreeToggle<CR>
 nmap <C-p> :Files<CR>
+nmap <C-S-p> :Commands<CR>
 " nmap <C-p> :Rg<CR>
 nmap <C-k> :TagbarToggle<CR>
 nmap <leader>f :Rg<CR>
