@@ -177,14 +177,45 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym Left resize shrink width 10px
-    bindsym $left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym $down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym $up resize shrink height 10px
-    bindsym Right resize grow width 10px
-    bindsym $right resize grow width 10px
+    bindsym Left resize shrink width 5ppt
+    bindsym $left resize shrink width 5ppt
+    bindsym Shift+Left resize shrink width 1ppt
+    bindsym Shift+$left resize shrink width 1ppt
+
+    bindsym Down resize grow height 5ppt
+    bindsym $down resize grow height 5ppt
+    bindsym Shift+Down resize grow height 1ppt
+    bindsym Shift+$down resize grow height 1ppt
+
+    bindsym Up resize shrink height 5ppt
+    bindsym $up resize shrink height 5ppt
+    bindsym Shift+Up resize shrink height 1ppt
+    bindsym Shift+$up resize shrink height 1ppt
+
+    bindsym Right resize grow width 5ppt
+    bindsym $right resize grow width 5ppt
+    bindsym Shift+Right resize grow width 1ppt
+    bindsym Shift+$right resize grow width 1ppt
+
+    bindsym 1 resize set height 10ppt
+    bindsym 2 resize set height 20ppt
+    bindsym 3 resize set height 30ppt
+    bindsym 4 resize set height 40ppt
+    bindsym 5 resize set height 50ppt
+    bindsym 6 resize set height 60ppt
+    bindsym 7 resize set height 70ppt
+    bindsym 8 resize set height 80ppt
+    bindsym 9 resize set height 90ppt
+
+    bindsym Shift+1 resize set width 10ppt
+    bindsym Shift+2 resize set width 20ppt
+    bindsym Shift+3 resize set width 30ppt
+    bindsym Shift+4 resize set width 40ppt
+    bindsym Shift+5 resize set width 50ppt
+    bindsym Shift+6 resize set width 60ppt
+    bindsym Shift+7 resize set width 70ppt
+    bindsym Shift+8 resize set width 80ppt
+    bindsym Shift+9 resize set width 90ppt
 
     # Return to default mode
     bindsym Return mode "default"
