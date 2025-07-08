@@ -9,6 +9,7 @@
     // Choose the order of the modules
     "modules-left": [
         "clock",
+        "custom/events",
         "mpris",
     ],
     "modules-center": [
@@ -179,6 +180,14 @@
               "artist",
             ],
             // "ignored-players": ["firefox"]
+    },
+    "custom/events": {
+      // "format": "{title}",
+      "escape": true,
+      // "format": "foo {title}",
+      "return-type": "json",
+      "interval": 60,
+      "exec": "$HOME/.local/bin/khal list --json 'all' now tomorrow | jq -c 'map(select(.title | endswith(\" (via Clockwise)\") | not)) | .[0] | { \"text\": \"\\(.title) - \\(.[\"start-time\"])\", \"class\": \"event\" }'",
     },
     "custom/power": {
         "format" : "⏻ ",
