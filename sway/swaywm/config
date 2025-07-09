@@ -3,6 +3,8 @@
 include './catppuccin-mocha'
 
 # target                 title     bg        text   indicator  border
+client.focused           $lavender $base     $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base     $text  $overlay0  $overlay0
 client.unfocused         $overlay2 $surface1 $text  #ffffff00  #ffffff00
 client.focused           $lavender $base     $text  $rosewater $lavender
 client.focused_inactive  $overlay0 $base     $text  #ffffff00  #ffffff00
@@ -100,8 +102,8 @@ set $websearch fuzzel-web-search
     bindsym $mod+Shift+$right move right
 
     # More move focus around
-    bindsym $mod+Tab focus next
-    bindsym $mod+Shift+Tab focus prev
+    bindsym $mod+Tab exec rofi -show window
+    # bindsym $mod+Shift+Tab focus prev
 #
 # Workspaces:
 #
@@ -290,6 +292,7 @@ focus_on_window_activation focus
 
 # Floating
 for_window [app_id="polkit-gnome-authentication-agent-1"] floating enable
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 
 for_window [app_id="keymapp"] floating enable, opacity 0.85, sticky enable, move position 73ppt 1ppt
 
@@ -300,11 +303,23 @@ for_window [app_id="org.mozilla.firefox"] move container to workspace 2
 # Chats
 for_window [app_id="Slack"] move container to workspace 3
 for_window [class="Signal"] move container to workspace 3
+for_window [app_id="org.telegram.desktop"] move container to workspace 3
+for_window [app_id="com.discordapp.Discord"] move container to workspace 3
+for_window [app_id="org.squidowl.halloy"] move container to workspace 3
+for_window [app_id="org.signal.Signal"] move container to workspace 3
+for_window [app_id="com.rtosta.zapzap"] move container to workspace 3
+
+# Gaming
+for_window [app_id="gamescope"] mark gamelauncher
+for_window [class="ffxiv_dx11.exe"] mark gamelauncher
+for_window [class="XIVLauncher.Core"] mark gamelauncher
+for_window [con_mark="gamelauncher"] move container to workspace 10
+for_window [con_mark="gamelauncher"] move fullscreen enable
 
 
 # systemd stuff
-exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
-exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
+# exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+# exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 ## Hey
 
@@ -331,7 +346,7 @@ input "type:touchpad" {
 }
 
 input type:keyboard {
-    xkb_layout us
+    xkb_layout us,br
     xkb_options caps:super
 }
 
