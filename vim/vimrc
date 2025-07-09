@@ -37,7 +37,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'majutsushi/tagbar'
 
-  Plug 'octol/vim-cpp-enhanced-highlight'
+  " Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'bfrg/vim-c-cpp-modern'
   Plug 'kelan/gyp.vim'
   Plug 'godlygeek/tabular'
   Plug 'plasticboy/vim-markdown'
@@ -54,7 +55,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/ctags.vim'
 
   " Uncomment if developing
-  Plug '~/workspace/mmarchini/bpftrace.vim'
+  " Plug '~/workspace/mmarchini/bpftrace.vim'
+  Plug 'mmarchini/bpftrace.vim'
 
   Plug 'pangloss/vim-javascript'
   Plug 'maxmellon/vim-jsx-pretty'
