@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x
+
+ACTIVE="$(cat /etc/tuned/active_profile)"
+tuned-adm profile throughput-performance
+$@
+EXIT_STATUS=$?
+tuned-adm profile $ACTIVE
+exit $EXIT_STATUS
