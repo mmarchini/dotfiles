@@ -1,5 +1,5 @@
 configuration{
-    modi: "drun,filebrowser";
+    modi: "drun,combi,window";
     icon-theme: "Oranchelo";
     show-icons: true;
     terminal: "alacritty";
@@ -15,7 +15,9 @@ configuration{
     sidebar-mode: true;
     sort: true;
     case-sensitive: false;
-    sorting-method: 'fzf';
+    sorting-method: "fzf";
+    window-format: "{w} {t} {r}";
+    combi-modes: "window,drun";
 }
 
 @theme "catppuccin-mocha"
