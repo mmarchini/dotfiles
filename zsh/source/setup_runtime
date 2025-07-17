@@ -6,8 +6,6 @@ source "$DOTFILES_PATH/helpers/source"
 # Python global binaries
 PYTHON2_VERSION=$(python2 --version 2>&1 | awk '{ print $2 }' | cut -d'.' -f1,2)
 PYTHON3_VERSION=$(python3 --version 2>&1 | awk '{ print $2 }' | cut -d'.' -f1,2)
-prependPathIfExists "$HOME/Library/Python/$PYTHON2_VERSION/bin"
-prependPathIfExists "$HOME/Library/Python/$PYTHON3_VERSION/bin"
 prependPathIfExists "$HOME/.local/bin"
 prependPathIfExists "$HOME/.poetry/bin"
 
@@ -18,19 +16,6 @@ prependPathIfExists "$HOME/go/bin"
 
 # cargo (Rust global binaries)
 sourceIfExists $HOME/.cargo/env
-
-# nvm (Node.js global binaries)
-export NVM_DIR="$HOME/.nvm"
-if [ -d $NVM_DIR ]; then
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  --no-use # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  if ! nvm use --silent --lts; then
-    read -q "REPLY?Node.js LTS not installed. Install? Y/n"
-    if [[ "$REPLY" == "y" ]]; then
-      nvm install --lts
-    fi
-  fi
-fi
 
 # gem (Ruby)
 export GEM_HOME="$HOME/.gem"

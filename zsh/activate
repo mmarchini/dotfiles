@@ -4,6 +4,7 @@
 set +e
 
 if [ ! -z "$ZSH_PROFILING" ]; then
+  START=$(($(date +%s%N)/1000000))
   zmodload zsh/zprof
 fi
 #
@@ -18,10 +19,11 @@ for file in "${DOTFILES_PATH}/zsh/source"/*; do
   source "$file"
 done
 
-zsh "$DOTFILES_PATH/helpers/sync-dotfiles"
-
 sourceIfExists "${HOME}/.localzshrc"
 
 if [ ! -z "$ZSH_PROFILING" ]; then
   zprof
+  echo "Ran in $(($(date +%s%N)/1000000 - "$START")) milliseconds";
 fi
+
+#TODO: add motd
