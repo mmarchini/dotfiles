@@ -23,6 +23,7 @@ set $up k
 
 # Your preferred terminal emulator
 set $term foot
+set $term-cwd ~/.dotfiles/bin/common/foot-cwd
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -47,7 +48,8 @@ set $websearch fuzzel-web-search
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec $term-cwd
+    bindsym $mod+Shift+Return exec $term
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -62,6 +64,7 @@ set $websearch fuzzel-web-search
     # Screenshot and screen recording
     bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
 
+    bindsym $mod+backslash exec 1password --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --quick-access
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -236,6 +239,17 @@ mode "swap" {
 }
 bindsym $mod+t mark --add swap, mode "swap"
 
+mode "notifications" {
+    # bindsym t swap container with mark swap, $leaveSwap
+    bindsym d exec makoctl dismiss
+    bindsym m exec makoctl mode -t do-not-disturb
+
+    # Return to default mode
+    bindsym Escape mode "default"
+    bindsym q      mode "default"
+}
+bindsym $mod+n mode "notifications"
+
 #
 # Generic Special Keys
 #
@@ -299,6 +313,7 @@ for_window [app_id="keymapp"] floating enable, opacity 0.85, sticky enable, move
 # Browser
 for_window [app_id="google-chrome"] move container to workspace 2
 for_window [app_id="org.mozilla.firefox"] move container to workspace 2
+for_window [app_id="zen"] move container to workspace 2
 
 # Chats
 for_window [app_id="Slack"] move container to workspace 3
@@ -315,6 +330,10 @@ for_window [class="ffxiv_dx11.exe"] mark gamelauncher
 for_window [class="XIVLauncher.Core"] mark gamelauncher
 for_window [con_mark="gamelauncher"] move container to workspace 10
 for_window [con_mark="gamelauncher"] move fullscreen enable
+
+for_window [app_id="zenity"] floating enable
+for_window [app_id="yad"] floating enable
+for_window [title="ME3Tweaks Mod Manager"] floating enable
 
 
 # systemd stuff
