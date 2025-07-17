@@ -1,0 +1,5 @@
+#!/bin/bash
+
+dotcd
+
+git -c color.status=always status -sb | cat

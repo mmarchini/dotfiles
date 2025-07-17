@@ -1,9 +1,6 @@
 #!/bin/bash
 
-if [ -z "$DOTFILES_PATH" ]; then
-  echo "no DOTFILES_PATH, exiting"
-  exit 1
-fi
+dotcd
 
 git add -A
 git add -i
