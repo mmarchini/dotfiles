@@ -1,0 +1,13 @@
+#!/bin/bash
+
+pid=$(~/.dotfiles/bin/common/sway-focused-pid)
+
+if [ "$(cat /proc/"${pid}"/comm)" != "foot" ]; then
+  exec foot ${@}
+fi
+
+ppid=$(pgrep --newest --parent ${pid})
+cwd=$(readlink /proc/${ppid}/cwd || echo $HOME)
+
+exec foot -D "$cwd" ${@}
+
