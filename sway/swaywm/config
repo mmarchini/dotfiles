@@ -31,7 +31,7 @@ set $term-cwd ~/.dotfiles/bin/common/foot-cwd
 set $menu rofi -show drun
 # set $menu dmenu_path | bemenu | xargs swaymsg exec --
 
-set $websearch fuzzel-web-search
+set $websearch ~/.dotfiles/bin/common/rofi-web-search
 
 ### Idle configuration
 #
@@ -362,6 +362,7 @@ input "type:touchpad" {
   natural_scroll enabled
   tap enabled
   click_method clickfinger
+  drag_lock disabled
 }
 
 input type:keyboard {

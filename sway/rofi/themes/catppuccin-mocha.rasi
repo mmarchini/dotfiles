@@ -8,7 +8,7 @@
     fg-col2: #f38ba8;
     grey: #6c7086;
 
-    width: 1200;
+    width: 80%;
     font: "Hack Nerd Font Mono 18";
 }
 
@@ -18,7 +18,7 @@ element-text, element-icon , mode-switcher {
 }
 
 window {
-    height: 700px;
+    height: 80%;
     border: 2px;
     border-color: @border-col;
     background-color: @bg-col;

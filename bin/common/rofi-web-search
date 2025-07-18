@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -ex
+
+QUERY=$(echo '' | rofi-dmenu-nolines --horizontal-pad=25 --lines=0 --dmenu --prompt "Search: ")
+if [ -n "$QUERY" ]; then
+  # Preferably no hard-coded search engine and would use the browser default
+  # search engine instead
+  URL="https://kagi.com/search?q=$(echo $QUERY | tr " " "+")"
+  xdg-open $URL
+  # This should figure out where the search was opened, but I'm tired and this
+  # scrit is already a mess
+  exec swaymsg '[app_id=zen] focus'
+fi

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec echo "${XDG_DATA_HOME:-$HOME/.local/share}:${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
