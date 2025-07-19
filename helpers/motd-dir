@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+test -z "$XDG_RUNTIME_DIR" && echo 'missing XDG_RUNTIME_DIR, exiting' && exit 1
+motd_dir="${XDG_RUNTIME_DIR}/motd.d"
+mkdir -p "$motd_dir"
+
+export motd_dir

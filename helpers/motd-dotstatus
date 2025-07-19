@@ -1,0 +1,42 @@
+#!/bin/zsh
+
+test -z "$DOTFILES_PATH" && echo 'missing DOTFILES_PATH, exiting' && exit 1
+echo 1 $PATH
+source $DOTFILES_PATH/bin/binrc
+echo 2 $PATH
+! which dotstatus > /dev/null && echo 'dotstatus not on PATH, exiting' && exit 1
+
+set -e
+
+cd "$DOTFILES_PATH"
+
+source "$DOTFILES_PATH/helpers/motd-dir"
+
+motd_file="${motd_dir}"/00_dotstatus.motd
+
+function generate_motd {
+  echo 'dotfiles status:'
+  echo
+  #TODO: fancy formatting
+  dotstatus
+}
+
+function write_motd {
+  echo 'generating motd'
+  generate_motd > "${motd_file}"
+  echo 'motd generated'
+}
+
+write_motd
+
+inotifywait --event modify --monitor --recursive . |
+  while read -r directory events filename; do
+    # echo "directory events filename: \"${directory}\" \"${events}\" \"${filename}\""
+    if ! git check-ignore --non-matching --verbose "${directory}/${filename}" >/dev/null 2>&1
+    then
+      echo 'dotfiles updated'
+      write_motd
+    else
+      # echo 'ignored file, skipping'
+    fi
+  done

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+test -z "$DOTFILES_PATH" && echo 'missing DOTFILES_PATH, exiting' && exit 1
+! which dotstatus > /dev/null && echo 'dotstatus not on PATH, exiting' && exit 1
+
+set -e
+
+source "$DOTFILES_PATH/helpers/motd-dir"
+
+echo "Welcome $USER!"
+echo
+cat $motd_dir/*.motd

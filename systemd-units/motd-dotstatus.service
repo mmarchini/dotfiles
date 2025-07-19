@@ -1,0 +1,13 @@
+[Unit]
+Description=Update partial motd with status of dotfiles folder
+
+[Service]
+# TODO: no hardcoded path
+Type=simple
+Environment="DOTFILES_PATH=/home/mmarchini/.dotfiles"
+ExecStart=/home/mmarchini/.dotfiles/helpers/motd-dotstatus
+Restart=no
+# Restart=on-failure
+
+[Install]
+WantedBy=default.target
