@@ -5,4 +5,4 @@ if [ -z "$DOTFILES_PATH" ]; then
   exit 1
 fi
 
-cd $DOTFILES_PATH
+exec cd $DOTFILES_PATH

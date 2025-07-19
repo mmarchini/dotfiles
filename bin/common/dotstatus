@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 dotcd
 
 git -c color.status=always status -sb | cat

@@ -10,6 +10,15 @@ zshprofiling () {
   ZSH_PROFILING=1 /usr/bin/time zsh -i -c exit
 }
 
+dotcd () {
+  if [ -z "$DOTFILES_PATH" ]; then
+    echo "no DOTFILES_PATH, exiting"
+    return 1
+  fi
+
+  cd $DOTFILES_PATH
+}
+
 alias duh='du -sh .[!.]* *'
 alias vim="vim -p"
 alias xim="xargs -o vim -p"

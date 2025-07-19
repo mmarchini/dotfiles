@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 dotcd
 
 git pull --ff-only
