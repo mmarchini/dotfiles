@@ -22,9 +22,17 @@ function generate_motd {
 }
 
 function write_motd {
-  echo 'generating motd'
-  generate_motd > "${motd_file}"
-  echo 'motd generated'
+  if dotstatus > /dev/null; then
+    echo 'generating motd'
+    generate_motd > "${motd_file}"
+    echo 'motd generated'
+  else
+    echo 'didnt find changes'
+    if [ -f "${motd_file}" ]; then
+      echo 'deleting previous status'
+      rm ${motd_file}
+    fi
+  fi
 }
 
 write_motd

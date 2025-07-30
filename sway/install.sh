@@ -4,7 +4,7 @@ set -xe
 export DOTFILES_PATH=${DOTFILES_PATH:-"$HOME/.dotfiles"}
 
 # TODO: use a metapackage  to manage dependencies
-sudo dnf install sway rofi-wayland  wl-clipboard wlsunset waybar grim slurp polkit-gnome brightnessctl mako kanshi
+sudo dnf install sway rofi-wayland  wl-clipboard wlsunset waybar grim slurp polkit-gnome brightnessctl mako kanshi rofimoji
 
 # GTK Catpuccin Theme
 if [ ! -d ~/.local/share/themes/catppuccin-mocha-lavender-standard+default ]; then

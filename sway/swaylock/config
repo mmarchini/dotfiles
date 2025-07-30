@@ -1,4 +1,4 @@
-# ignore-empty-password
+ignore-empty-password
 image=~/.config/swaylock/lock.jpg
 scaling=fill
 

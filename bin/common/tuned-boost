@@ -1,10 +1,10 @@
 #!/bin/bash
 
-set -x
+# set -x
 
 ACTIVE="$(cat /etc/tuned/active_profile)"
 tuned-adm profile throughput-performance
-$@
+systemd-inhibit --what=idle:sleep --who=tuned-boost --why="running performance mode" $@
 EXIT_STATUS=$?
 tuned-adm profile $ACTIVE
 exit $EXIT_STATUS

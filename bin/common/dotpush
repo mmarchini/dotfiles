@@ -4,8 +4,6 @@ set -e
 
 source $(which dotcd)
 
-pwd
-
 git add -A
 git add -i
 git commit
