@@ -4,12 +4,12 @@ import sys
 import subprocess
 
 menu = [
-  ("󰒲 Hibernate", ["systemctl", "hibernate"]),
-  ("󰒲 Suspend", ["systemctl", "suspend"]),
-  #  ("󰩈 Logout", ["riverctl", "exit"]), # TODO: make this work with river too
-  ("󰩈 Logout", ["swaymsg", "exit"]), # TODO: make this work with sway too
-  ("󰑓 Reboot", ["reboot"]),
-  ("⏻ Shutdown", ["poweroff"]),
+  (" Lock",      ["pkill", "-USR1", "swayidle"]),
+  ("󰤄 Hibernate", ["systemctl", "hibernate"]),
+  ("󰒲 Suspend",   ["systemctl", "suspend"]),
+  ("󰩈 Logout",    ["swaymsg", "exit"]), # TODO: make this work with sway too
+  ("󰑓 Reboot",    ["reboot"]),
+  ("⏻ Shutdown",  ["poweroff"]),
 ]
 
 result = subprocess.run(["rofi", "-dmenu", "-sep", "|", "-format", "d"], input = "|".join([a[0] for a in menu]), text = True, capture_output = True)
