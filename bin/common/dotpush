@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/bin/zsh
 
 set -e
 
-dotcd
+source $(which dotcd)
+
+pwd
 
 git add -A
 git add -i

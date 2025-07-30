@@ -11,12 +11,7 @@ zshprofiling () {
 }
 
 dotcd () {
-  if [ -z "$DOTFILES_PATH" ]; then
-    echo "no DOTFILES_PATH, exiting"
-    return 1
-  fi
-
-  cd $DOTFILES_PATH
+  source $(which _dotcd)
 }
 
 alias duh='du -sh .[!.]* *'

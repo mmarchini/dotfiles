@@ -2,6 +2,6 @@
 
 set -e
 
-dotcd
+source $(which dotcd)
 
 git -c color.status=always status -sb | cat
