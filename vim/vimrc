@@ -30,6 +30,7 @@ call plug#begin('~/.vim/plugged')
 
   " Plug 'valloric/youcompleteme'
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coq_nvim', {'branch': 'coq'}
 
   Plug 'dietsche/vim-lastplace'
   Plug 'ntpeters/vim-better-whitespace'

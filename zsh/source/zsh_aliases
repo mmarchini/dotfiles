@@ -10,12 +10,9 @@ zshprofiling () {
   ZSH_PROFILING=1 /usr/bin/time zsh -i -c exit
 }
 
-dotcd () {
-  source $(which _dotcd)
-}
-
 alias duh='du -sh .[!.]* *'
 alias vim="vim -p"
 alias xim="xargs -o vim -p"
 alias c="code -r"
 alias docker-rm-exited='docker rm -v $(docker ps -a -q -f status=exited)'
+alias dotcd='cd $DOTFILES_PATH'

@@ -5,3 +5,11 @@ source "$DOTFILES_PATH/helpers/source"
 
 # TODO install fzf and share config
 sourceIfExists "$HOME/.fzf.zsh"
+
+if which tailscale; then
+  source <(tailscale completion zsh)
+fi
+
+if which op; then
+  source <(op completion zsh)
+fi

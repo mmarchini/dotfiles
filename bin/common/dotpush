@@ -2,7 +2,7 @@
 
 set -e
 
-source $(which dotcd)
+test -n "$DOTFILES_PATH" && cd $DOTFILES_PATH
 
 git add -A
 git add -i

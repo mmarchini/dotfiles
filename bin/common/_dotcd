@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ -z "$DOTFILES_PATH" ]; then
-  echo "no DOTFILES_PATH, exiting"
-else
-  cd $DOTFILES_PATH
-fi
