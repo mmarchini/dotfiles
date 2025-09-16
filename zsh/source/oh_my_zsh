@@ -1,13 +1,22 @@
 #!/bin/zsh
 
+
 export ZSH=${ZSH:-$HOME/.oh-my-zsh}
 
 ZSH_THEME="mmarchini"
 
 zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+if ! test -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"; then
+  echo "Installing fzf-tab..."
+  git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+  echo "Done!"
+fi
 
 # TODO(mmarchini): OS and env specific plugins
 plugins=(
+  fzf-tab
   nvm
   zsh-autosuggestions
   zsh-syntax-highlighting

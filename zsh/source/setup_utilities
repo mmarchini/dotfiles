@@ -6,10 +6,19 @@ source "$DOTFILES_PATH/helpers/source"
 # TODO install fzf and share config
 sourceIfExists "$HOME/.fzf.zsh"
 
-if which tailscale; then
+if which tailscale > /dev/null 2> /dev/null; then
   source <(tailscale completion zsh)
 fi
 
-if which op; then
+if which op > /dev/null 2> /dev/null; then
   source <(op completion zsh)
+fi
+
+if which uv > /dev/null 2> /dev/null; then
+  eval "$(uv generate-shell-completion zsh)"
+  eval "$(uvx --generate-shell-completion zsh)"
+fi
+
+if which terraform >/dev/null 2> /dev/null; then
+  complete -C $(which terraform) terraform
 fi

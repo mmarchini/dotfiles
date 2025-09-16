@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+if [ -f "/home/linuxbrew/.linuxbrew/Homebrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/Homebrew/bin/brew shellenv)"
+fi
+
+autoload -Uz compinit
+compinit

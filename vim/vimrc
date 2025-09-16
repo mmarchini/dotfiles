@@ -29,7 +29,9 @@ call plug#begin('~/.vim/plugged')
   " Plug 'rrethy/vim-illuminate'
 
   " Plug 'valloric/youcompleteme'
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  if executable('node')
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  endif
   " Plug 'neoclide/coq_nvim', {'branch': 'coq'}
 
   Plug 'dietsche/vim-lastplace'
@@ -76,7 +78,7 @@ call plug#end()
 
 map <C-n> :NERDTreeToggle<CR>
 nmap <C-p> :Files<CR>
-nmap <C-S-p> :Commands<CR>
+" nmap <C-S-p> :Commands<CR>
 " nmap <C-p> :Rg<CR>
 nmap <C-k> :TagbarToggle<CR>
 nmap <leader>f :Rg<CR>
@@ -148,7 +150,7 @@ let g:lightline.active = {
 autocmd BufNewFile ~/vimwiki/diary/[0-9]*.wiki :silent %!echo "= `date -d '%:t:r' +'\%Y-\%d-\%m'` =\n\n== Things Done ==\n\n"
 " END
 
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-rust-analyzer' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-rust-analyzer', 'coc-pyright', 'coc-json' ]
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list

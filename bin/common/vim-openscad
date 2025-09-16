@@ -1,0 +1,6 @@
+#!/bin/bash
+
+trap 'kill -- -$$' EXIT
+
+flatpak run org.openscad.OpenSCAD --viewall $1 &
+vim $1
